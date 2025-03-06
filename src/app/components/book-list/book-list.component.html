@@ -1,0 +1,51 @@
+<div class="filters">
+    <input
+      pInputText
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="filterBooks()"
+      placeholder="Search for books"
+    />
+    <p-dropdown
+      [options]="genres"
+      [(ngModel)]="selectedGenre"
+      (onChange)="filterBooks()"
+      placeholder="Filter by Genre"
+    ></p-dropdown>
+    <p-checkbox
+      label="In Stock"
+      [(ngModel)]="selectedStock"
+      (onChange)="filterBooks()"
+    ></p-checkbox>
+    <button id="resetButton" (click)="resetFilters()">Reset Filters</button>
+  </div>
+<p-table [value]="filteredBooks" [paginator]="true" [rows]="5" responsiveLayout="scroll" class="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Published Year</th>
+        <th>Description</th>
+        <th>Stock</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-book>
+      <tr>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.genre }}</td>
+        <td>{{ book.publishedYear }}</td>
+        <td>{{ book.description }}</td>
+        <td>
+          <span [ngClass]="book.stock > 0 ? 'text-green-600' : 'text-red-600'">
+            {{ book.stock }}
+          </span>
+        </td>
+        <td>
+          <button pButton label="Book Now" icon="pi pi-shopping-cart" class="p-button-sm" [disabled]="book.stock === 0"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>

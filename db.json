@@ -1,0 +1,94 @@
+{
+    "books": [
+      {
+        "id": 1,
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Classic Fiction",
+        "publishedYear": 1925,
+        "description": "A novel about the American dream.",
+        "stock": 1
+      },
+      {
+        "id": 2,
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Dystopian",
+        "publishedYear": 1949,
+        "description": "A story of a totalitarian future society.",
+        "stock": 8
+      },
+      {
+        "id": 3,
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Historical Fiction",
+        "publishedYear": 1960,
+        "description": "A novel about racial injustice in the Deep South.",
+        "stock": 3
+      },
+      {
+        "id": 4,
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "genre": "Romance",
+        "publishedYear": 1813,
+        "description": "A classic romance novel.",
+        "stock": 6
+      },
+      {
+        "id": 5,
+        "title": "Moby Dick",
+        "author": "Herman Melville",
+        "genre": "Adventure",
+        "publishedYear": 1851,
+        "description": "The tale of a man's obsession with a whale.",
+        "stock": 4
+      },
+      {
+        "id": 6,
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "author": "J.K. Rowling",
+        "genre": "Fantasy",
+        "publishedYear": 1997,
+        "description": "A young wizard's first year at Hogwarts.",
+        "stock": 10
+      },
+      {
+        "id": 7,
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "publishedYear": 1937,
+        "description": "Bilbo Baggins' journey to reclaim a lost kingdom.",
+        "stock": 7
+      },
+      {
+        "id": 8,
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "genre": "Literary Fiction",
+        "publishedYear": 1951,
+        "description": "A teenager's journey through New York City.",
+        "stock": 5
+      },
+      {
+        "id": 9,
+        "title": "The Da Vinci Code",
+        "author": "Dan Brown",
+        "genre": "Mystery Thriller",
+        "publishedYear": 2003,
+        "description": "A symbologist uncovers a religious mystery.",
+        "stock": 9
+      },
+      {
+        "id": 10,
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "genre": "Philosophical Fiction",
+        "publishedYear": 1988,
+        "description": "A shepherd's journey to find his destiny.",
+        "stock": 6
+      }
+    ]
+  }
