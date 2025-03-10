@@ -7,7 +7,8 @@
         "genre": "Classic Fiction",
         "publishedYear": 1925,
         "description": "A novel about the American dream.",
-        "stock": 1
+        "stock": 1,
+        "isbn": "978-3-16-148410-0"
       },
       {
         "id": 2,
@@ -16,7 +17,8 @@
         "genre": "Dystopian",
         "publishedYear": 1949,
         "description": "A story of a totalitarian future society.",
-        "stock": 8
+        "stock": 8,
+        "isbn": "978-0-452-28423-4"
       },
       {
         "id": 3,
@@ -25,7 +27,8 @@
         "genre": "Historical Fiction",
         "publishedYear": 1960,
         "description": "A novel about racial injustice in the Deep South.",
-        "stock": 3
+        "stock": 3,
+        "isbn": "978-0-7432-7356-5"
       },
       {
         "id": 4,
@@ -34,7 +37,8 @@
         "genre": "Romance",
         "publishedYear": 1813,
         "description": "A classic romance novel.",
-        "stock": 6
+        "stock": 6,
+        "isbn": "978-0-14-028329-7"
       },
       {
         "id": 5,
@@ -43,7 +47,8 @@
         "genre": "Adventure",
         "publishedYear": 1851,
         "description": "The tale of a man's obsession with a whale.",
-        "stock": 4
+        "stock": 4,
+        "isbn": "978-0-14-118506-4"
       },
       {
         "id": 6,
@@ -52,7 +57,8 @@
         "genre": "Fantasy",
         "publishedYear": 1997,
         "description": "A young wizard's first year at Hogwarts.",
-        "stock": 10
+        "stock": 10,
+        "isbn": "978-0-06-093546-7"
       },
       {
         "id": 7,
@@ -61,7 +67,8 @@
         "genre": "Fantasy",
         "publishedYear": 1937,
         "description": "Bilbo Baggins' journey to reclaim a lost kingdom.",
-        "stock": 7
+        "stock": 7,
+        "isbn": "978-0-316-01792-3"
       },
       {
         "id": 8,
@@ -70,7 +77,8 @@
         "genre": "Literary Fiction",
         "publishedYear": 1951,
         "description": "A teenager's journey through New York City.",
-        "stock": 5
+        "stock": 5,
+        "isbn": "978-0-553-21311-7"
       },
       {
         "id": 9,
@@ -79,7 +87,8 @@
         "genre": "Mystery Thriller",
         "publishedYear": 2003,
         "description": "A symbologist uncovers a religious mystery.",
-        "stock": 9
+        "stock": 9,
+        "isbn": "978-0-553-21311-7"
       },
       {
         "id": 10,
@@ -88,7 +97,8 @@
         "genre": "Philosophical Fiction",
         "publishedYear": 1988,
         "description": "A shepherd's journey to find his destiny.",
-        "stock": 6
+        "stock": 6,
+        "isbn": "978-0-553-21311-8"
       }
     ]
   }

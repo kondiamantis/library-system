@@ -1,0 +1,38 @@
+Feature Enhancements & Improvements
+1️⃣ Book Details Page (Modal or Separate Page)
+📌 When a user clicks on a book, show detailed information (cover image, full description, reviews, etc.).
+🔥 How? Use PrimeNG Dialog (p-dialog) or navigate to a book details page using Angular Router.
+
+2️⃣ User Authentication & Role Management
+👥 Add login & registration so users can have different roles:
+📖 Regular users: Can browse books & book them.
+👩‍💼 Admins: Can add, edit, or delete books.
+🔥 How? Use JWT authentication with a backend or Firebase for easy implementation.
+
+3️⃣ Book Borrowing System
+📅 Allow users to "borrow" a book and set a due date.
+🚨 Notify users when a book is overdue.
+🔥 How? Add a "Book Now" button that changes status & updates stock.
+
+4️⃣ Wishlist or Favorite Books
+💖 Let users save books to a "Favorites" list for future reference.
+🔥 How? Store favorite books in local storage or a user profile in the backend.
+
+5️⃣ Book Ratings & Reviews
+⭐ Users can rate books (1-5 stars) and leave reviews.
+🏆 Display top-rated books in a separate section.
+🔥 How? Use PrimeNG Rating (p-rating) and store reviews in a database.
+
+6️⃣ Sorting & More Advanced Filters
+🔄 Allow sorting by title, author, year, stock count.
+🏷️ Add multi-select filtering (e.g., choose multiple genres at once).
+🔥 How? Use PrimeNG MultiSelect (p-multiselect) and add sorting options.
+
+7️⃣ Dark Mode Toggle 🌙
+🌓 Let users switch between light & dark mode for better UX.
+🔥 How? Use Angular theming (scss variables) or PrimeNG’s built-in themes.
+
+8️⃣ Animations & Better UI
+🎨 Add smooth animations when filtering or switching pages.
+🏗 Improve book card design with better spacing & visuals.
+🔥 How? Use Angular animations or PrimeNG Skeleton Loaders for smooth transitions.

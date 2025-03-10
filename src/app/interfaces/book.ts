@@ -6,5 +6,6 @@ export interface Book {
     publishedYear: number;
     description: string;
     stock: number;
+    isbn: string;
   }
   

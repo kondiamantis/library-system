@@ -5,21 +5,18 @@
       [(ngModel)]="searchText"
       (input)="filterBooks()"
       placeholder="Search for books"
+      class="minimal-input uniform-size"
     />
-    <p-dropdown
-      [options]="genres"
-      [(ngModel)]="selectedGenre"
-      (onChange)="filterBooks()"
-      placeholder="Filter by Genre"
-    ></p-dropdown>
-    <p-checkbox
+      <p-autocomplete [(ngModel)]="selectedGenre" [dropdown]="true" [suggestions]="genreItems" (completeMethod)="search($event)" />
+    <!-- <p-checkbox
       label="In Stock"
       [(ngModel)]="selectedStock"
       (onChange)="filterBooks()"
-    ></p-checkbox>
-    <button id="resetButton" (click)="resetFilters()">Reset Filters</button>
+    ></p-checkbox> -->
+    <p-button label="Reset" class="uniform-size resetFiltersButton" [raised]="true" severity="danger" (click)="resetFilters()"/>
+    <!-- <button pButton type="button" label="Reset" class="p-button-text" (click)="resetFilters()"></button> -->
   </div>
-<p-table [value]="filteredBooks" [paginator]="true" [rows]="5" responsiveLayout="scroll" class="p-datatable-sm">
+<p-table [value]="filteredBooks" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" responsiveLayout="scroll" [showCurrentPageReport]="true" class="p-datatable-sm">
     <ng-template pTemplate="header">
       <tr>
         <th>Title</th>
@@ -32,7 +29,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-book>
-      <tr>
+      <tr (click)="showBookDetails(book)">
         <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.genre }}</td>
@@ -49,3 +46,20 @@
       </tr>
     </ng-template>
   </p-table>
+  <!-- Modal for Book Details -->
+  <p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true">
+    <div *ngIf="selectedBook">
+      <img [src]="getBookCover(selectedBook.isbn)" alt="Book Cover" class="book-cover"/>
+      <h3>{{ selectedBook.title }}</h3>
+      <p><strong>Author:</strong> {{ selectedBook.author }}</p>
+      <p><strong>Genre:</strong> {{ selectedBook.genre }}</p>
+      <p><strong>Published Year:</strong> {{ selectedBook.publishedYear }}</p>
+      <p><strong>Description:</strong> {{ selectedBook.description }}</p>
+      <p><strong>Stock:</strong> 
+        <span [ngClass]="selectedBook.stock > 0 ? 'text-green-600' : 'text-red-600'">
+          {{ selectedBook.stock }}
+        </span>
+      </p>
+      <button pButton label="Book Now" icon="pi pi-shopping-cart" class="p-button-sm" [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
+    </div>
+  </p-dialog>
