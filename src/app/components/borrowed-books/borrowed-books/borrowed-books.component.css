@@ -1,0 +1,42 @@
+/* src/app/components/borrowed-books/borrowed-books.component.css */
+.borrowed-books-container {
+    padding: 20px;
+  }
+  
+  .status-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .status-tag.borrowed {
+    background-color: #e1f0fb;
+    color: #3498db;
+  }
+  
+  .status-tag.overdue {
+    background-color: #fbe7e7;
+    color: #e74c3c;
+  }
+  
+  .status-tag.due-soon {
+    background-color: #fef3c7;
+    color: #d97706;
+  }
+  
+  .overdue-row {
+    background-color: rgba(231, 76, 60, 0.05);
+  }
+  
+  .empty-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+    color: #666;
+  }
+  

@@ -7,5 +7,15 @@ export interface Book {
     description: string;
     stock: number;
     isbn: string;
-  }
+    // New properties for borrowing system
+    borrowed: BorrowStatus[];
+}
+
+export interface BorrowStatus {
+  userId: number;
+  borrowDate: Date;
+  dueDate: Date;
+  returned?: Date;
+  isOverdue?: boolean;
+}
   

@@ -1,4 +1,4 @@
-Feature Enhancements & Improvements
+Feature Enhancements & Improvements (check)
 1️⃣ Book Details Page (Modal or Separate Page)
 📌 When a user clicks on a book, show detailed information (cover image, full description, reviews, etc.).
 🔥 How? Use PrimeNG Dialog (p-dialog) or navigate to a book details page using Angular Router.
@@ -28,7 +28,7 @@ Feature Enhancements & Improvements
 🏷️ Add multi-select filtering (e.g., choose multiple genres at once).
 🔥 How? Use PrimeNG MultiSelect (p-multiselect) and add sorting options.
 
-7️⃣ Dark Mode Toggle 🌙
+7️⃣ Dark Mode Toggle 🌙 (check)
 🌓 Let users switch between light & dark mode for better UX.
 🔥 How? Use Angular theming (scss variables) or PrimeNG’s built-in themes.
 

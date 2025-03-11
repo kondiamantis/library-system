@@ -1,0 +1,52 @@
+<!-- src/app/components/borrowed-books/borrowed-books.component.html -->
+<div class="borrowed-books-container">
+    <p-table [value]="borrowedBooks" 
+             [loading]="loading"
+             styleClass="p-datatable-sm" 
+             [tableStyle]="{'min-width': '50rem'}"
+             [paginator]="borrowedBooks.length > 10" 
+             [rows]="10">
+      
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-book>
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ borrowingService.getDueDate(book) }}</td>
+          <td>
+            <span class="status-badge" 
+                  [class.overdue]="borrowingService.isBookOverdue(book)">
+              {{ borrowingService.isBookOverdue(book) ? 'Overdue' : 'On time' }}
+            </span>
+          </td>
+          <td>
+            <button pButton 
+                    label="Return" 
+                    icon="pi pi-reply" 
+                    class="p-button-sm p-button-outlined"
+                    (click)="returnBook(book)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5" class="text-center">
+            <div class="empty-message">
+              <p>You haven't borrowed any books yet.</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  

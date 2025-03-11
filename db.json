@@ -1,104 +1,315 @@
 {
-    "books": [
-      {
-        "id": 1,
-        "title": "The Great Gatsby",
-        "author": "F. Scott Fitzgerald",
-        "genre": "Classic Fiction",
-        "publishedYear": 1925,
-        "description": "A novel about the American dream.",
-        "stock": 5,
-        "isbn": "978-3-16-148410-0"
-      },
-      {
-        "id": 2,
-        "title": "1984",
-        "author": "George Orwell",
-        "genre": "Dystopian",
-        "publishedYear": 1949,
-        "description": "A story of a totalitarian future society.",
-        "stock": 8,
-        "isbn": "978-0-452-28423-4"
-      },
-      {
-        "id": 3,
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
-        "genre": "Historical Fiction",
-        "publishedYear": 1960,
-        "description": "A novel about racial injustice in the Deep South.",
-        "stock": 3,
-        "isbn": "978-0-7432-7356-5"
-      },
-      {
-        "id": 4,
-        "title": "Pride and Prejudice",
-        "author": "Jane Austen",
-        "genre": "Romance",
-        "publishedYear": 1813,
-        "description": "A classic romance novel.",
-        "stock": 6,
-        "isbn": "978-0-14-028329-7"
-      },
-      {
-        "id": 5,
-        "title": "Moby Dick",
-        "author": "Herman Melville",
-        "genre": "Adventure",
-        "publishedYear": 1851,
-        "description": "The tale of a man's obsession with a whale.",
-        "stock": 4,
-        "isbn": "978-0-14-118506-4"
-      },
-      {
-        "id": 6,
-        "title": "Harry Potter and the Sorcerer's Stone",
-        "author": "J.K. Rowling",
-        "genre": "Fantasy",
-        "publishedYear": 1997,
-        "description": "A young wizard's first year at Hogwarts.",
-        "stock": 10,
-        "isbn": "978-0-06-093546-7"
-      },
-      {
-        "id": 7,
-        "title": "The Hobbit",
-        "author": "J.R.R. Tolkien",
-        "genre": "Fantasy",
-        "publishedYear": 1937,
-        "description": "Bilbo Baggins' journey to reclaim a lost kingdom.",
-        "stock": 7,
-        "isbn": "978-0-316-01792-3"
-      },
-      {
-        "id": 8,
-        "title": "The Catcher in the Rye",
-        "author": "J.D. Salinger",
-        "genre": "Literary Fiction",
-        "publishedYear": 1951,
-        "description": "A teenager's journey through New York City.",
-        "stock": 5,
-        "isbn": "978-0-553-21311-7"
-      },
-      {
-        "id": 9,
-        "title": "The Da Vinci Code",
-        "author": "Dan Brown",
-        "genre": "Mystery Thriller",
-        "publishedYear": 2003,
-        "description": "A symbologist uncovers a religious mystery.",
-        "stock": 9,
-        "isbn": "978-0-553-21311-7"
-      },
-      {
-        "id": 10,
-        "title": "The Alchemist",
-        "author": "Paulo Coelho",
-        "genre": "Philosophical Fiction",
-        "publishedYear": 1988,
-        "description": "A shepherd's journey to find his destiny.",
-        "stock": 6,
-        "isbn": "978-0-553-21311-8"
-      }
-    ]
-  }
+  "books": [
+    {
+      "id": "1",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Classic Fiction",
+      "publishedYear": 1925,
+      "description": "A novel about the American dream.",
+      "stock": 5,
+      "isbn": "978-3-16-148410-0",
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T11:18:17.577Z",
+          "dueDate": "2025-03-25T11:18:17.577Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T11:18:19.941Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T11:22:47.949Z",
+          "dueDate": "2025-03-25T11:22:47.949Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T11:22:53.981Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T11:54:38.422Z",
+          "dueDate": "2025-03-25T11:54:38.422Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T11:54:47.602Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:05:45.151Z",
+          "dueDate": "2025-03-25T12:05:45.151Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:05:49.043Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:10:26.141Z",
+          "dueDate": "2025-03-25T12:10:26.141Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:10:27.154Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:12:18.690Z",
+          "dueDate": "2025-03-25T12:12:18.690Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:12:19.883Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:15:02.947Z",
+          "dueDate": "2025-03-25T12:15:02.947Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:15:05.400Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:26:38.871Z",
+          "dueDate": "2025-03-25T12:26:38.870Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:26:47.431Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:34:22.673Z",
+          "dueDate": "2025-03-25T12:34:22.673Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:34:32.708Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:36:32.324Z",
+          "dueDate": "2025-03-25T12:36:32.324Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:36:36.082Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:46:23.858Z",
+          "dueDate": "2025-03-25T12:46:23.858Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:46:25.533Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:46:28.447Z",
+          "dueDate": "2025-03-25T12:46:28.447Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:46:29.481Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T13:00:37.913Z",
+          "dueDate": "2025-03-25T13:00:37.913Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T13:00:41.829Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T13:00:44.652Z",
+          "dueDate": "2025-03-25T13:00:44.652Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T13:01:07.299Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T13:01:12.633Z",
+          "dueDate": "2025-03-25T13:01:12.633Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T13:07:50.822Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T13:07:59.913Z",
+          "dueDate": "2025-03-25T13:07:59.913Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T13:08:28.545Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T13:08:37.152Z",
+          "dueDate": "2025-03-25T13:08:37.152Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:15:43.858Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:26:35.386Z",
+          "dueDate": "2025-03-25T14:26:35.385Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:28:35.889Z"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Dystopian",
+      "publishedYear": 1949,
+      "description": "A story of a totalitarian future society.",
+      "stock": 8,
+      "isbn": "978-0-452-28423-4",
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:26:40.625Z",
+          "dueDate": "2025-03-25T12:26:40.625Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:26:48.388Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:34:59.518Z",
+          "dueDate": "2025-03-25T12:34:59.518Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:36:20.566Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:16:37.163Z",
+          "dueDate": "2025-03-25T14:16:37.163Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:16:40.843Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:21:02.182Z",
+          "dueDate": "2025-03-25T14:21:02.182Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:21:18.437Z"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Historical Fiction",
+      "publishedYear": 1960,
+      "description": "A novel about racial injustice in the Deep South.",
+      "stock": 3,
+      "isbn": "978-0-7432-7356-5",
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:26:42.268Z",
+          "dueDate": "2025-03-25T12:26:42.268Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:26:48.894Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T12:36:24.066Z",
+          "dueDate": "2025-03-25T12:36:24.066Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T12:36:34.338Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:15:48.236Z",
+          "dueDate": "2025-03-25T14:15:48.236Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:15:54.187Z"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Romance",
+      "publishedYear": 1813,
+      "description": "A classic romance novel.",
+      "stock": 6,
+      "isbn": "978-0-14-028329-7",
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:16:04.357Z",
+          "dueDate": "2025-03-25T14:16:04.357Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:16:13.526Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:21:00.449Z",
+          "dueDate": "2025-03-25T14:21:00.449Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:21:17.808Z"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Moby Dick",
+      "author": "Herman Melville",
+      "genre": "Adventure",
+      "publishedYear": 1851,
+      "description": "The tale of a man's obsession with a whale.",
+      "stock": 4,
+      "isbn": "978-0-14-118506-4",
+      "borrowed": []
+    },
+    {
+      "id": "6",
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "publishedYear": 1997,
+      "description": "A young wizard's first year at Hogwarts.",
+      "stock": 10,
+      "isbn": "978-0-06-093546-7",
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-11T14:20:55.441Z",
+          "dueDate": "2025-03-25T14:20:55.441Z",
+          "isOverdue": false,
+          "returned": "2025-03-11T14:21:17.187Z"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "publishedYear": 1937,
+      "description": "Bilbo Baggins' journey to reclaim a lost kingdom.",
+      "stock": 7,
+      "isbn": "978-0-316-01792-3",
+      "borrowed": []
+    },
+    {
+      "id": "8",
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "genre": "Literary Fiction",
+      "publishedYear": 1951,
+      "description": "A teenager's journey through New York City.",
+      "stock": 5,
+      "isbn": "978-0-553-21311-7",
+      "borrowed": []
+    },
+    {
+      "id": "9",
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "genre": "Mystery Thriller",
+      "publishedYear": 2003,
+      "description": "A symbologist uncovers a religious mystery.",
+      "stock": 9,
+      "isbn": "978-0-553-21311-7",
+      "borrowed": []
+    },
+    {
+      "id": "10",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Philosophical Fiction",
+      "publishedYear": 1988,
+      "description": "A shepherd's journey to find his destiny.",
+      "stock": 6,
+      "isbn": "978-0-553-21311-8",
+      "borrowed": []
+    }
+  ]
+}

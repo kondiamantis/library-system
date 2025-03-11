@@ -1,1 +1,22 @@
-<app-book-list></app-book-list>
+<!-- src/app/app.component.html -->
+<div class="app-container">
+    <p-toast></p-toast>
+    
+    <div class="header">
+        
+      <h1>Library Management System</h1>
+        <div class="theme-toggle">
+            <p-button [icon]="themeIcon" (onClick)="toggleDarkMode()" class="dark-mode-toggle"/>
+        </div>
+    </div>
+    
+    <!-- Use p-tabMenu component -->
+    <p-tabMenu [model]="items" [activeItem]="items[activeTab === 'books' ? 0 : 1]" styleClass="mb-3"></p-tabMenu>
+    
+    <!-- Content area -->
+    <div class="content-container">
+      <app-book-list *ngIf="activeTab === 'books'"></app-book-list>
+      <app-borrowed-books *ngIf="activeTab === 'borrowed'"></app-borrowed-books>
+    </div>
+</div>
+  
