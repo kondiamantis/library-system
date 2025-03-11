@@ -1,65 +1,74 @@
 <div class="filters">
-    <input
+  <input
       pInputText
       type="text"
       [(ngModel)]="searchText"
       (input)="filterBooks()"
       placeholder="Search for books"
       class="minimal-input uniform-size"
-    />
-      <p-autocomplete [(ngModel)]="selectedGenre" [dropdown]="true" [suggestions]="genreItems" (completeMethod)="search($event)" />
-    <!-- <p-checkbox
-      label="In Stock"
-      [(ngModel)]="selectedStock"
-      (onChange)="filterBooks()"
-    ></p-checkbox> -->
-    <p-button label="Reset" class="uniform-size resetFiltersButton" [raised]="true" severity="danger" (click)="resetFilters()"/>
-    <!-- <button pButton type="button" label="Reset" class="p-button-text" (click)="resetFilters()"></button> -->
-  </div>
+    /> 
+  
+  <p-autocomplete 
+  [(ngModel)]="selectedGenre" 
+  [suggestions]="genreItems" 
+  (completeMethod)="search($event)"
+  (onSelect)="filterBooks()"
+  (onClear)="clearGenre()"
+  placeholder="Select Genre"
+  [dropdown]="true"
+  class="genre-autocomplete minimal-input uniform-size"/>
+
+  <p-button label="Reset" [raised]="true" severity="danger" (click)="resetFilters()"/>
+  
+  <!-- Dark Mode Toggle -->
+  <p-button [icon]="themeIcon" (onClick)="toggleDarkMode()" class="dark-mode-toggle"/>
+</div>
+
 <p-table [value]="filteredBooks" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" responsiveLayout="scroll" [showCurrentPageReport]="true" class="p-datatable-sm">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Genre</th>
-        <th>Published Year</th>
-        <th>Description</th>
-        <th>Stock</th>
-        <th>Action</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-book>
-      <tr (click)="showBookDetails(book)">
-        <td>{{ book.title }}</td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.genre }}</td>
-        <td>{{ book.publishedYear }}</td>
-        <td>{{ book.description }}</td>
-        <td>
-          <span [ngClass]="book.stock > 0 ? 'text-green-600' : 'text-red-600'">
-            {{ book.stock }}
-          </span>
-        </td>
-        <td>
-          <button pButton label="Book Now" icon="pi pi-shopping-cart" class="p-button-sm" [disabled]="book.stock === 0"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-  <!-- Modal for Book Details -->
-  <p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true">
-    <div *ngIf="selectedBook">
-      <img [src]="getBookCover(selectedBook.isbn)" alt="Book Cover" class="book-cover"/>
-      <h3>{{ selectedBook.title }}</h3>
-      <p><strong>Author:</strong> {{ selectedBook.author }}</p>
-      <p><strong>Genre:</strong> {{ selectedBook.genre }}</p>
-      <p><strong>Published Year:</strong> {{ selectedBook.publishedYear }}</p>
-      <p><strong>Description:</strong> {{ selectedBook.description }}</p>
-      <p><strong>Stock:</strong> 
-        <span [ngClass]="selectedBook.stock > 0 ? 'text-green-600' : 'text-red-600'">
-          {{ selectedBook.stock }}
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Genre</th>
+      <th>Published Year</th>
+      <th>Description</th>
+      <th>Stock</th>
+      <th>Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-book>
+    <tr (click)="showBookDetails(book)">
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.genre }}</td>
+      <td>{{ book.publishedYear }}</td>
+      <td>{{ book.description }}</td>
+      <td>
+        <span [ngClass]="book.stock > 0 ? 'text-green-600' : 'text-red-600'">
+          {{ book.stock }}
         </span>
-      </p>
-      <button pButton label="Book Now" icon="pi pi-shopping-cart" class="p-button-sm" [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
-    </div>
-  </p-dialog>
+      </td>
+      <td>
+        <button pButton label="Book Now" icon="pi pi-shopping-cart" class="p-button-sm" [disabled]="book.stock === 0"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Modal for Book Details -->
+<p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true">
+  <div *ngIf="selectedBook">
+    <img [src]="getBookCover(selectedBook.isbn)" alt="Book Cover" class="book-cover"/>
+    <h3>{{ selectedBook.title }}</h3>
+    <p><strong>Author:</strong> {{ selectedBook.author }}</p>
+    <p><strong>Genre:</strong> {{ selectedBook.genre }}</p>
+    <p><strong>Published Year:</strong> {{ selectedBook.publishedYear }}</p>
+    <p><strong>Description:</strong> {{ selectedBook.description }}</p>
+    <p><strong>Stock:</strong> 
+      <span [ngClass]="selectedBook.stock > 0 ? 'text-green-600' : 'text-red-600'">
+        {{ selectedBook.stock }}
+      </span>
+    </p>
+    <button pButton label="Book Now" icon="pi pi-shopping-cart" class="p-button-sm" [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
+  </div>
+</p-dialog>
