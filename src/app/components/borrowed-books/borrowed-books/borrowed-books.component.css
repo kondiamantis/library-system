@@ -1,42 +1,55 @@
 /* src/app/components/borrowed-books/borrowed-books.component.css */
 .borrowed-books-container {
-    padding: 20px;
-  }
-  
-  .status-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-  
-  .status-tag.borrowed {
-    background-color: #e1f0fb;
-    color: #3498db;
-  }
-  
-  .status-tag.overdue {
-    background-color: #fbe7e7;
-    color: #e74c3c;
-  }
-  
-  .status-tag.due-soon {
-    background-color: #fef3c7;
-    color: #d97706;
-  }
-  
-  .overdue-row {
-    background-color: rgba(231, 76, 60, 0.05);
-  }
-  
-  .empty-message {
-    display: flex;
+  padding: 1rem;
+}
+
+.section-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--primary-color, #3f51b5);
+  border-bottom: 2px solid var(--surface-300, #e0e0e0);
+  padding-bottom: 0.5rem;
+}
+
+.book-title-link {
+  color: var(--primary-color, #3f51b5);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.book-title-link:hover {
+  text-decoration: underline;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-color-secondary, #6c757d);
+}
+
+.empty-message i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.empty-message p {
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .action-buttons {
     flex-direction: column;
-    align-items: center;
-    padding: 40px 0;
-    color: #666;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
-  
+}

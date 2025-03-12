@@ -1,0 +1,185 @@
+/* src/app/components/book-detail/book-detail.component.css */
+.book-detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+  }
+  
+  .loading-spinner p {
+    margin-top: 1rem;
+    color: var(--text-color-secondary, #6c757d);
+  }
+  
+  .back-link {
+    margin-bottom: 1.5rem;
+  }
+  
+  .back-link a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color, #3f51b5);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+  
+  .back-link i {
+    margin-right: 0.5rem;
+  }
+  
+  .book-header {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+  
+  .book-image {
+    width: 200px;
+    height: 300px;
+    margin-right: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .book-image.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+  }
+  
+  .book-image.placeholder i {
+    font-size: 3rem;
+    color: #999;
+  }
+  
+  .book-info {
+    flex: 1;
+  }
+  
+  .book-title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+  }
+  
+  .book-author {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #666;
+  }
+  
+  .book-genre {
+    margin-bottom: 1rem;
+  }
+  
+  .genre-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background-color: var(--primary-color-lighter, #e8eaf6);
+    color: var(--primary-color, #3f51b5);
+    border-radius: 16px;
+    font-size: 0.85rem;
+  }
+  
+  .book-isbn {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .isbn-label {
+    font-weight: bold;
+    margin-right: 0.25rem;
+  }
+  
+  .book-actions {
+    margin-bottom: 1.5rem;
+  }
+  
+  .ml-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .book-status {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .status-label {
+    font-weight: bold;
+    margin-right: 0.25rem;
+  }
+  
+  .status-value {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  
+  .status-value.available {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+  }
+  
+  .status-value.borrowed {
+    background-color: #fff8e1;
+    color: #ff8f00;
+  }
+  
+  .borrow-details {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .borrow-date, .due-date {
+    margin-bottom: 0.5rem;
+  }
+  
+  .detail-label {
+    font-weight: bold;
+    margin-right: 0.25rem;
+  }
+  
+  .book-description {
+    margin-top: 1.5rem;
+  }
+  
+  .book-description h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color, #3f51b5);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .book-header {
+      flex-direction: column;
+    }
+    
+    .book-image {
+      margin-right: 0;
+      margin-bottom: 1.5rem;
+      width: 150px;
+      height: 225px;
+    }
+  }
+  

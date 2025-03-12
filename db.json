@@ -9,6 +9,8 @@
       "description": "A novel about the American dream.",
       "stock": 5,
       "isbn": "978-3-16-148410-0",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": [
         {
           "userId": 1,
@@ -135,6 +137,55 @@
           "dueDate": "2025-03-25T14:26:35.385Z",
           "isOverdue": false,
           "returned": "2025-03-11T14:28:35.889Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T09:55:00.115Z",
+          "dueDate": "2025-03-26T09:55:00.115Z",
+          "isOverdue": false,
+          "returned": "2025-03-12T09:55:04.626Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T09:55:31.253Z",
+          "dueDate": "2025-03-26T09:55:31.253Z",
+          "isOverdue": false,
+          "returned": "2025-03-12T09:55:37.997Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T10:41:56.275Z",
+          "dueDate": "2025-03-26T10:41:56.275Z",
+          "isOverdue": false,
+          "returned": "2025-03-12T10:41:59.290Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T11:37:50.996Z",
+          "dueDate": "2025-03-26T11:37:50.996Z",
+          "returned": true,
+          "returnDate": "2025-03-12T11:38:56.923Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T11:50:34.666Z",
+          "dueDate": "2025-03-26T11:50:34.666Z",
+          "returned": true,
+          "returnDate": "2025-03-12T11:52:09.178Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:04:14.046Z",
+          "dueDate": "2025-03-26T14:04:14.046Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:12:16.583Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:12:51.799Z",
+          "dueDate": "2025-03-26T14:12:51.799Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:14:12.193Z"
         }
       ]
     },
@@ -147,6 +198,8 @@
       "description": "A story of a totalitarian future society.",
       "stock": 8,
       "isbn": "978-0-452-28423-4",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": [
         {
           "userId": 1,
@@ -175,6 +228,13 @@
           "dueDate": "2025-03-25T14:21:02.182Z",
           "isOverdue": false,
           "returned": "2025-03-11T14:21:18.437Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:14:34.739Z",
+          "dueDate": "2025-03-26T14:14:34.739Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:21:52.435Z"
         }
       ]
     },
@@ -187,6 +247,8 @@
       "description": "A novel about racial injustice in the Deep South.",
       "stock": 3,
       "isbn": "978-0-7432-7356-5",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": [
         {
           "userId": 1,
@@ -208,6 +270,20 @@
           "dueDate": "2025-03-25T14:15:48.236Z",
           "isOverdue": false,
           "returned": "2025-03-11T14:15:54.187Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T12:03:48.105Z",
+          "dueDate": "2025-03-26T12:03:48.105Z",
+          "returned": true,
+          "returnDate": "2025-03-12T12:09:22.834Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:03:52.355Z",
+          "dueDate": "2025-03-26T14:03:52.355Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:04:04.203Z"
         }
       ]
     },
@@ -220,6 +296,8 @@
       "description": "A classic romance novel.",
       "stock": 6,
       "isbn": "978-0-14-028329-7",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": [
         {
           "userId": 1,
@@ -246,7 +324,24 @@
       "description": "The tale of a man's obsession with a whale.",
       "stock": 4,
       "isbn": "978-0-14-118506-4",
-      "borrowed": []
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:02:33.693Z",
+          "dueDate": "2025-03-26T14:02:33.693Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:03:43.428Z"
+        },
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:03:53.221Z",
+          "dueDate": "2025-03-26T14:03:53.221Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:04:04.596Z"
+        }
+      ]
     },
     {
       "id": "6",
@@ -257,6 +352,8 @@
       "description": "A young wizard's first year at Hogwarts.",
       "stock": 10,
       "isbn": "978-0-06-093546-7",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": [
         {
           "userId": 1,
@@ -276,6 +373,8 @@
       "description": "Bilbo Baggins' journey to reclaim a lost kingdom.",
       "stock": 7,
       "isbn": "978-0-316-01792-3",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": []
     },
     {
@@ -287,6 +386,8 @@
       "description": "A teenager's journey through New York City.",
       "stock": 5,
       "isbn": "978-0-553-21311-7",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": []
     },
     {
@@ -298,6 +399,8 @@
       "description": "A symbologist uncovers a religious mystery.",
       "stock": 9,
       "isbn": "978-0-553-21311-7",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
       "borrowed": []
     },
     {
@@ -309,7 +412,17 @@
       "description": "A shepherd's journey to find his destiny.",
       "stock": 6,
       "isbn": "978-0-553-21311-8",
-      "borrowed": []
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
+      "borrowed": [
+        {
+          "userId": 1,
+          "borrowDate": "2025-03-12T14:03:53.864Z",
+          "dueDate": "2025-03-26T14:03:53.864Z",
+          "returned": true,
+          "returnDate": "2025-03-12T14:04:05.011Z"
+        }
+      ]
     }
   ]
 }

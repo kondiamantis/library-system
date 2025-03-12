@@ -1,0 +1,26 @@
+<!-- src/app/components/app-shell/app-shell.component.html -->
+<div class="app-container" [ngClass]="{'dark-mode': isDarkMode}">
+    <p-toast></p-toast>
+    
+    <div class="header">
+      <div class="theme-toggle">
+        <button pButton 
+                [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" 
+                (click)="toggleTheme()" 
+                class="p-button-rounded p-button-text"></button>
+      </div>
+      <h1>Library Management System</h1>
+    </div>
+    
+    <!-- Use p-tabMenu component -->
+    <p-tabMenu [model]="items" [activeItem]="items[activeTab === 'books' ? 0 : (activeTab === 'borrowed' ? 1 : 2)]" styleClass="mb-3"></p-tabMenu>
+    
+    <!-- Main content area -->
+    <div class="content-container">
+      <!-- Show component based on active tab -->
+      <app-book-list *ngIf="activeTab === 'books'"></app-book-list>
+      <app-borrowed-books *ngIf="activeTab === 'borrowed'"></app-borrowed-books>
+      <app-wishlist *ngIf="activeTab === 'wishlist'"></app-wishlist>
+    </div>
+  </div>
+  

@@ -9,7 +9,7 @@ Feature Enhancements & Improvements (check)
 👩‍💼 Admins: Can add, edit, or delete books.
 🔥 How? Use JWT authentication with a backend or Firebase for easy implementation.
 
-3️⃣ Book Borrowing System
+3️⃣ Book Borrowing System (check)
 📅 Allow users to "borrow" a book and set a due date.
 🚨 Notify users when a book is overdue.
 🔥 How? Add a "Book Now" button that changes status & updates stock.

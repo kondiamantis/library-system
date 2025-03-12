@@ -13,6 +13,9 @@ import { BorrowingService } from '../../services/borrowing.service';
 import { BorrowStatus } from '../../interfaces/book';
 import { MessageService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
+import { WishlistService } from '../../services/wishlist.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
@@ -28,12 +31,14 @@ import {ToastModule} from 'primeng/toast';
     CheckboxModule, 
     DialogModule,
     InputTextModule,
-    ToastModule
+    ToastModule,
+    TooltipModule
   ],
+  providers: [MessageService]
 })
 
 export class BookList implements OnInit {
-  books: Book[] = [];
+  books: Book[] = []
   filteredBooks: Book[] = [];
   searchText: string = '';
   
@@ -58,13 +63,22 @@ export class BookList implements OnInit {
   isDarkMode: boolean = false;
   themeIcon: string = 'pi pi-moon';
 
-  constructor(private bookService: BookService,
-              private borrowingService: BorrowingService,
-              private messageService: MessageService
+  constructor(
+    private router: Router,
+    private borrowingService: BorrowingService,
+    private wishlistService: WishlistService,
+    private messageService: MessageService,
+    private bookService: BookService
   ) {}
 
   ngOnInit(): void {
     this.loadBooks();
+  }
+
+  viewBookDetails(book: Book) {
+    this.router.navigate(['/books', book.id]);
+    // Inform the parent component to show the details view
+    // This can be a service method or event emitter
   }
 
   loadBooks(): void {
@@ -119,8 +133,19 @@ export class BookList implements OnInit {
     this.filteredBooks = this.books; // Reset to all books
   }
   
-  getBookCover(isbn: string): string {
-    return `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+  getBookCover(book: Book): string {
+    // Check if the book has a coverImage field in db.json
+    if (book.coverImage) {
+      return book.coverImage;
+    }
+    
+    // Fallback to Open Library API if ISBN is available
+    if (book.isbn) {
+      return `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+    }
+
+    // Default image if no cover is available
+    return 'assets/images/no-cover.png';
   }
 
   showBookDetails(book: Book): void {
@@ -220,6 +245,51 @@ export class BookList implements OnInit {
         console.error('Error returning book:', error);
       }
     );
+  }
+
+  toggleFavorite(book: Book): void {
+    this.wishlistService.toggleFavorite(book).subscribe({
+      next: (updatedBook) => {
+        // Update the book in the list
+        const indexInFiltered = this.filteredBooks.findIndex(b => b.id === updatedBook.id);
+        if (indexInFiltered !== -1) {
+          this.filteredBooks[indexInFiltered] = updatedBook;
+        }
+        
+        const indexInAll = this.books.findIndex(b => b.id === updatedBook.id);
+        if (indexInAll !== -1) {
+          this.books[indexInAll] = updatedBook;
+        }
+        
+        // If the book is currently selected in the modal, update that too
+        if (this.selectedBook && this.selectedBook.id === updatedBook.id) {
+          this.selectedBook = updatedBook;
+        }
+        
+        // Show success message
+        const isFavorited = this.wishlistService.isBookFavorited(updatedBook);
+        this.messageService.add({
+          severity: 'success',
+          summary: isFavorited ? 'Added to Wishlist' : 'Removed from Wishlist',
+          detail: isFavorited 
+            ? `"${book.title}" has been added to your wishlist` 
+            : `"${book.title}" has been removed from your wishlist`
+        });
+      },
+      error: (error) => {
+        console.error('Error toggling favorite status', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to update wishlist'
+        });
+      }
+    });
+  }
+
+  // Add new method to check if book is favorited
+  isBookFavorited(book: Book): boolean {
+    return this.wishlistService.isBookFavorited(book);
   }
 
 }

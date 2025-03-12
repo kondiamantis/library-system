@@ -23,93 +23,51 @@ export class BorrowingService {
     this.checkOverdueBooks();
   }
 
+
+
+  getBook(id: number): Observable<Book> {
+    return this.http.get<Book>(`${this.apiUrl}/${id}`);
+  }
+
   getBorrowedBooks(): Observable<Book[]> {
-    return this.borrowedBooks.asObservable();
+    return this.http.get<Book[]>(this.apiUrl).pipe(
+      map(books => books.filter(book => this.isBookBorrowedByUser(book)))
+    );
   }
 
   borrowBook(book: Book): Observable<Book> {
-    if (book.stock <= 0) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'This book is out of stock'
-      });
-      return of(book);
-    }
-
-    // Create borrow status
-    const dueDate = new Date();
-    dueDate.setDate(dueDate.getDate() + 14); // 2 weeks borrowing period
-    
-    const borrowStatus: BorrowStatus = {
-      userId: this.currentUserId,
-      borrowDate: new Date(),
-      dueDate: dueDate,
-      isOverdue: false
-    };
-
-    // Update book
-    const updatedBook = {...book}; // Create a copy to avoid reference issues
+    // Create a deep copy of the book to avoid mutation
+    const updatedBook = JSON.parse(JSON.stringify(book)) as Book;
     
     if (!updatedBook.borrowed) {
       updatedBook.borrowed = [];
     }
     
-    updatedBook.borrowed.push(borrowStatus);
-    updatedBook.stock--;
-
-    // Update the book on json-server
-    return this.http.put<Book>(`${this.apiUrl}/${updatedBook.id}`, updatedBook).pipe(
-      tap(book => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `You have borrowed "${book.title}". Due date: ${dueDate.toLocaleDateString()}`
-        });
-        
-        this.loadBorrowedBooks();
-      }),
-      catchError(error => {
-        console.error('Error borrowing book:', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `Could not borrow book. Error: ${error.message}`
-        });
-        return of(book); // Return original book on error
-      })
-    );
-  }
-
-  returnBook(book: Book, borrowIndex: number): Observable<Book> {
-    // Create a copy of the book to avoid reference issues
-    const updatedBook = JSON.parse(JSON.stringify(book));
+    const borrowDate = new Date();
+    const dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 14); // 2 weeks loan period
     
-    // Mark as returned
-    updatedBook.borrowed[borrowIndex].returned = new Date();
-    updatedBook.stock++;
-
-    // Update the book on json-server
-    return this.http.put<Book>(`${this.apiUrl}/${updatedBook.id}`, updatedBook).pipe(
-      tap(book => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: `You have returned "${book.title}"`
-        });
-        
-        this.loadBorrowedBooks();
-      }),
-      catchError(error => {
-        console.error('Error returning book:', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: `Could not return book. Error: ${error.message}`
-        });
-        return of(book); // Return original book on error
-      })
-    );
+    // Create a properly typed borrow status object
+    const borrowStatus: BorrowStatus = {
+      userId: this.currentUserId,
+      borrowDate: borrowDate.toISOString(),
+      dueDate: dueDate.toISOString(),
+      returned: false
+    };
+    
+    updatedBook.borrowed.push(borrowStatus);
+    
+    return this.http.put<Book>(`${this.apiUrl}/${book.id}`, updatedBook);
+  }
+  returnBook(book: Book, borrowIndex: number): Observable<Book> {
+    const updatedBook = { ...book };
+    
+    if (updatedBook.borrowed && borrowIndex >= 0 && borrowIndex < updatedBook.borrowed.length) {
+      updatedBook.borrowed[borrowIndex].returned = true;
+      updatedBook.borrowed[borrowIndex].returnDate = new Date().toISOString();
+    }
+    
+    return this.http.put<Book>(`${this.apiUrl}/${book.id}`, updatedBook);
   }
 
   private loadBorrowedBooks(): void {

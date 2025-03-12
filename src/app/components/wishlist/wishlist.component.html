@@ -1,0 +1,66 @@
+<!-- src/app/components/wishlist/wishlist.component.html -->
+<div class="wishlist-container">
+  <p-toast></p-toast>
+  
+  <div *ngIf="loading" class="loading-spinner">
+    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    <p>Loading your wishlist...</p>
+  </div>
+  
+  <div *ngIf="!loading && favoriteBooks.length === 0" class="empty-wishlist">
+    <div class="empty-message">
+      <i class="pi pi-heart-fill"></i>
+      <h3>Your wishlist is empty</h3>
+      <p>Browse the library and add books to your wishlist</p>
+      <button pButton label="Browse Books" icon="pi pi-book" [routerLink]="['/']"></button>
+    </div>
+  </div>
+  
+  <div *ngIf="!loading && favoriteBooks.length > 0" class="wishlist-books">
+    <div class="book-grid">
+      <p-card *ngFor="let book of favoriteBooks" styleClass="book-card">
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <div *ngIf="book.coverImage" class="book-cover">
+              <img [src]="book.coverImage" [alt]="book.title">
+            </div>
+            <div *ngIf="!book.coverImage" class="book-cover placeholder">
+              <i class="pi pi-book"></i>
+            </div>
+          </div>
+        </ng-template>
+        
+        <div class="book-info">
+          <h3 class="book-title">{{ book.title }}</h3>
+          <p class="book-author">by {{ book.author }}</p>
+          
+          <div *ngIf="book.genre" class="book-genre">
+            <span class="genre-badge">{{ book.genre }}</span>
+          </div>
+        </div>
+        
+        <ng-template pTemplate="footer">
+          <div class="card-actions">
+            <button pButton 
+                    [label]="isBookBorrowed(book) ? 'Return' : 'Borrow'" 
+                    [icon]="isBookBorrowed(book) ? 'pi pi-reply' : 'pi pi-shopping-cart'" 
+                    [class]="isBookBorrowed(book) ? 'p-button-outlined' : 'p-button'"
+                    (click)="isBookBorrowed(book) ? '' : borrowBook(book)"></button>
+                    
+            <button pButton 
+                    icon="pi pi-heart-fill" 
+                    class="p-button-rounded p-button-danger p-button-outlined" 
+                    (click)="removeFromFavorites(book)"
+                    pTooltip="Remove from wishlist"></button>
+                    
+            <!-- <button pButton 
+                    icon="pi pi-info-circle" 
+                    class="p-button-rounded p-button-text" 
+                    [routerLink]="['/books', book.id]"
+                    pTooltip="View details"></button> -->
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

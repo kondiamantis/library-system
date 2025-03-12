@@ -49,18 +49,31 @@
         </span>
       </td>
       <td>
-        <div *ngIf="isBookBorrowed(book)" class="borrowed-status">
-          <span [ngClass]="isBookOverdue(book) ? 'overdue-tag' : 'borrowed-tag'">
-            <i class="pi" [ngClass]="isBookOverdue(book) ? 'pi-exclamation-triangle' : 'pi-clock'"></i>
-            {{ isBookOverdue(book) ? 'Overdue' : 'Borrowed' }}
-          </span>
-          <div class="due-date">Due: {{ getDueDate(book) }}</div>
-          <button pButton label="Return" icon="pi pi-refresh" class="p-button-sm p-button-outlined" 
-                  (click)="returnBook(book); $event.stopPropagation()"></button>
+        <div class="action-buttons">
+          <!-- Wishlist heart button -->
+          <button pButton 
+            [icon]="isBookFavorited(book) ? 'pi pi-heart-fill' : 'pi pi-heart'" 
+            class="p-button-rounded p-button-text heart-button"
+            [ngClass]="isBookFavorited(book) ? 'p-button-danger' : 'p-button-outlined p-button-danger'"
+            (click)="toggleFavorite(book); $event.stopPropagation()"
+            pTooltip="{{isBookFavorited(book) ? 'Remove from wishlist' : 'Add to wishlist'}}">
+          </button>
+            
+          
+          <!-- Existing buttons -->
+          <div *ngIf="isBookBorrowed(book)" class="borrowed-status">
+            <span [ngClass]="isBookOverdue(book) ? 'overdue-tag' : 'borrowed-tag'">
+              <i class="pi" [ngClass]="isBookOverdue(book) ? 'pi-exclamation-triangle' : 'pi-clock'"></i>
+              {{ isBookOverdue(book) ? 'Overdue' : 'Borrowed' }}
+            </span>
+            <div class="due-date">Due: {{ getDueDate(book) }}</div>
+            <button pButton label="Return" icon="pi pi-refresh" class="p-button-sm p-button-outlined" 
+                    (click)="returnBook(book); $event.stopPropagation()"></button>
+          </div>
+          <button *ngIf="!isBookBorrowed(book)" pButton label="Book Now" icon="pi pi-shopping-cart" 
+                  class="p-button-sm p-button-success" [disabled]="book.stock === 0"
+                  (click)="showBookDetails(book); $event.stopPropagation()"></button>
         </div>
-        <button *ngIf="!isBookBorrowed(book)" pButton label="Book Now" icon="pi pi-shopping-cart" 
-                class="p-button-sm" [disabled]="book.stock === 0"
-                (click)="showBookDetails(book); $event.stopPropagation()"></button>
       </td>
     </tr>
   </ng-template>
@@ -69,7 +82,7 @@
 <!-- Modal for Book Details -->
 <p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true">
   <div *ngIf="selectedBook" class="book-detail-container">
-    <img [src]="getBookCover(selectedBook.isbn)" alt="Book Cover" class="book-cover"/>
+    <img [src]="getBookCover(selectedBook)" alt="Book Cover" class="book-cover"/>
     <h3>{{ selectedBook.title }}</h3>
     <p><strong>Author:</strong> {{ selectedBook.author }}</p>
     <p><strong>Genre:</strong> {{ selectedBook.genre }}</p>
@@ -92,7 +105,14 @@
                 (click)="returnBook(selectedBook)"></button>
       </div>
       <button *ngIf="!isBookBorrowed(selectedBook)" pButton label="Book Now" icon="pi pi-shopping-cart" 
-              [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
+        class="p-button-success" [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
     </div>
+    <button pButton 
+        [icon]="isBookFavorited(selectedBook) ? 'pi pi-heart-fill' : 'pi pi-heart'" 
+        class="p-button-rounded p-button-text heart-button favorite-btn"
+        [ngClass]="isBookFavorited(selectedBook) ? 'p-button-danger' : 'p-button-outlined p-button-danger'"
+        (click)="toggleFavorite(selectedBook)"
+        pTooltip="{{isBookFavorited(selectedBook) ? 'Remove from wishlist' : 'Add to wishlist'}}">
+    </button>
   </div>
 </p-dialog>

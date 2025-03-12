@@ -11,12 +11,13 @@
     </div>
     
     <!-- Use p-tabMenu component -->
-    <p-tabMenu [model]="items" [activeItem]="items[activeTab === 'books' ? 0 : 1]" styleClass="mb-3"></p-tabMenu>
+    <p-tabMenu [model]="items" [activeItem]="activeItem" styleClass="mb-3"></p-tabMenu>
     
     <!-- Content area -->
     <div class="content-container">
       <app-book-list *ngIf="activeTab === 'books'"></app-book-list>
       <app-borrowed-books *ngIf="activeTab === 'borrowed'"></app-borrowed-books>
+      <app-wishlist *ngIf="activeTab === 'wishlist'"></app-wishlist>
     </div>
 </div>
   

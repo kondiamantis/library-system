@@ -1,0 +1,85 @@
+<div class="book-detail-container">
+  <p-toast></p-toast>
+  
+  <div *ngIf="loading" class="loading-spinner">
+    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    <p>Loading book details...</p>
+  </div>
+  
+  <div *ngIf="!loading && book" class="book-content">
+    <div class="back-link">
+      <button pButton icon="pi pi-arrow-left" label="Back to Books" 
+              class="p-button-text" (click)="goBack()"></button>
+    </div>
+    
+    <div class="book-header">
+      <div class="book-image" *ngIf="book.coverImage">
+        <img [src]="book.coverImage" [alt]="book.title">
+      </div>
+      <div class="book-image placeholder" *ngIf="!book.coverImage">
+        <i class="pi pi-book"></i>
+      </div>
+      
+      <div class="book-info">
+        <h1 class="book-title">{{ book.title }}</h1>
+        <p class="book-author">by {{ book.author }}</p>
+        
+        <div *ngIf="book.genre" class="book-genre">
+          <span class="genre-badge">{{ book.genre }}</span>
+        </div>
+        
+        <div *ngIf="book.isbn" class="book-isbn">
+          <span class="isbn-label">ISBN:</span> {{ book.isbn }}
+        </div>
+        
+        <div class="book-actions">
+          <button pButton 
+              *ngIf="!isBookBorrowed()"
+              label="Borrow" 
+              icon="pi pi-shopping-cart" 
+              (click)="borrowBook()">
+          </button>
+                  
+          <button pButton 
+              *ngIf="isBookBorrowed()"
+              label="Return" 
+              icon="pi pi-reply" 
+              class="p-button-outlined"
+              (click)="returnBook()">
+          </button>
+                  
+          <button pButton 
+            [icon]="isBookFavorited() ? 'pi pi-heart-fill' : 'pi pi-heart'" 
+            class="p-button-rounded p-button-text"
+            [ngClass]="isBookFavorited() ? 'p-button-danger' : 'p-button-outlined p-button-danger'"
+            (click)="toggleFavorite()"
+            pTooltip="{{isBookFavorited() ? 'Remove from wishlist' : 'Add to wishlist'}}">
+          </button>
+        </div>
+        
+        <div class="book-status">
+          <span class="status-label">Status:</span>
+          <span class="status-value" [ngClass]="{'available': !isBookBorrowed(), 'borrowed': isBookBorrowed()}">
+            {{ isBookBorrowed() ? 'Borrowed' : 'Available' }}
+          </span>
+        </div>
+        
+        <div *ngIf="isBookBorrowed() && book.borrowed" class="borrow-details">
+          <div class="borrow-date">
+            <span class="detail-label">Borrow Date:</span>
+            {{ book.borrowed[0].borrowDate | date:'mediumDate' }}
+          </div>
+          <div class="due-date">
+            <span class="detail-label">Due Date:</span>
+            {{ book.borrowed[0].dueDate | date:'mediumDate' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="book-description" *ngIf="book.description">
+      <h2>Description</h2>
+      <p>{{ book.description }}</p>
+    </div>
+  </div>
+</div>
