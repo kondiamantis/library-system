@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { Book } from '../../../interfaces/book';
 import { BorrowingService } from '../../../services/borrowing.service';
 import { BookList } from '../../book-list/book-list.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-borrowed-books',
@@ -18,7 +19,9 @@ export class BorrowedBooksComponent implements OnInit {
   borrowedBooks: Book[] = [];
   loading = true;
 
-  constructor(public borrowingService: BorrowingService) {}
+  constructor(public borrowingService: BorrowingService,
+              private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     console.log('BorrowedBooksComponent initialized');
@@ -47,22 +50,33 @@ export class BorrowedBooksComponent implements OnInit {
     });
   }
 
-  returnBook(book: Book): void {
-    if (!book.borrowed) return;
-    
-    const borrowIndex = book.borrowed.findIndex(status => 
-      status.userId === this.borrowingService.currentUserId && !status.returned
-    );
-    
-    if (borrowIndex === -1) return;
-    
-    this.borrowingService.returnBook(book, borrowIndex).subscribe({
-      next: () => {
-        this.loadBorrowedBooks(); // Refresh the list
-      },
-      error: (error) => {
-        console.error('Error returning book', error);
-      }
-    });
-  }
+  // borrowed-books.component.ts
+returnBook(book: Book): void {
+  console.log('Returning book from borrowed list:', book.title, 'Current stock:', book.stock);
+  
+  this.borrowingService.returnBook(book).subscribe({
+    next: (updatedBook) => {
+      console.log('Book returned from borrowed list, new stock:', updatedBook.stock);
+      
+      // Remove the book from the borrowed books list
+      this.borrowedBooks = this.borrowedBooks.filter(b => b.id !== updatedBook.id);
+      
+      // Show success message
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Book Returned',
+        detail: `"${updatedBook.title}" has been returned successfully.`
+      });
+    },
+    error: (error) => {
+      console.error('Error returning book from borrowed list', error);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to return the book. Please try again.'
+      });
+    }
+  });
+}
+
 }

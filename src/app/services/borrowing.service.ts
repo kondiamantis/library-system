@@ -46,29 +46,70 @@ export class BorrowingService {
     const borrowDate = new Date();
     const dueDate = new Date();
     dueDate.setDate(dueDate.getDate() + 14); // 2 weeks loan period
+
+    //Decrease stock by 1
+    const stock = updatedBook.stock;
+    updatedBook.stock -= 1;
     
     // Create a properly typed borrow status object
     const borrowStatus: BorrowStatus = {
       userId: this.currentUserId,
       borrowDate: borrowDate.toISOString(),
       dueDate: dueDate.toISOString(),
-      returned: false
+      returned: false,
     };
     
     updatedBook.borrowed.push(borrowStatus);
     
     return this.http.put<Book>(`${this.apiUrl}/${book.id}`, updatedBook);
   }
-  returnBook(book: Book, borrowIndex: number): Observable<Book> {
-    const updatedBook = { ...book };
-    
-    if (updatedBook.borrowed && borrowIndex >= 0 && borrowIndex < updatedBook.borrowed.length) {
-      updatedBook.borrowed[borrowIndex].returned = true;
-      updatedBook.borrowed[borrowIndex].returnDate = new Date().toISOString();
-    }
-    
-    return this.http.put<Book>(`${this.apiUrl}/${book.id}`, updatedBook);
+
+  
+returnBook(book: Book): Observable<Book> {
+  
+  console.log('Return book called with book:', book);
+
+  // Create a deep copy of the book to modify
+  const updatedBook = JSON.parse(JSON.stringify(book)) as Book;
+  console.log('Created deep copy:', updatedBook);
+  
+  // Get current user ID
+  const userId = this.currentUserId;
+  console.log('Current user ID:', userId);
+
+  // Check if the book has borrowedBy array
+  if (!updatedBook.borrowed || updatedBook.borrowed.length === 0) {
+    console.warn('Book is not borrowed by anyone');
+    return of(book); // Return original book if not borrowed
   }
+  
+  // Find the user's borrow record
+  const userBorrowIndex = updatedBook.borrowed.findIndex(
+    record => record.userId === this.currentUserId
+  );
+  
+  if (userBorrowIndex === -1) {
+    console.warn('Book is not borrowed by current user');
+    return of(book); // Return original book if not borrowed by current user
+  }
+  
+  // Remove the user's borrow record
+  updatedBook.borrowed.splice(userBorrowIndex, 1);
+  
+  // Increase stock by 1
+  console.log('Old stock:', updatedBook.stock);
+  updatedBook.stock += 1;
+  console.log('New stock:', updatedBook.stock);
+  
+  console.log('Sending PUT request to:', `${this.apiUrl}/books/${book.id}`);
+  console.log('With data:', updatedBook);
+
+  console.log('Returning book, new stock:', updatedBook.stock);
+  
+  // Update the book in the database
+  return this.http.put<Book>(`${this.apiUrl}/${book.id}`, updatedBook);
+}
+
 
   private loadBorrowedBooks(): void {
     this.http.get<Book[]>(this.apiUrl).pipe(

@@ -205,47 +205,54 @@ export class BookList implements OnInit {
     return new Date(borrowStatus.dueDate).toLocaleDateString();
   }
   
-  returnBook(book: Book, event?: Event): void {
-    if (event) {
-      event.stopPropagation(); // Prevent row click if clicked on button
-    }
-    
-    if (!book.borrowed) return;
-    
-    const borrowIndex = book.borrowed.findIndex(status => 
-      status.userId === 1 && !status.returned
-    );
-    
-    if (borrowIndex === -1) return;
-    
-    this.borrowingService.returnBook(book, borrowIndex).subscribe(
-      (updatedBook) => {
-        console.log('Book returned successfully:', updatedBook);
-        
-        // Update the book in the list
-        const index = this.books.findIndex(b => b.id === updatedBook.id);
-        if (index !== -1) {
-          this.books[index] = updatedBook;
-          
-          // Also update the filteredBooks array if it exists
-          if (this.filteredBooks) {
-            const filteredIndex = this.filteredBooks.findIndex(b => b.id === updatedBook.id);
-            if (filteredIndex !== -1) {
-              this.filteredBooks[filteredIndex] = updatedBook;
-            }
-          }
-        }
-        
-        // Update selected book if it's the same one
-        if (this.selectedBook && this.selectedBook.id === updatedBook.id) {
-          this.selectedBook = updatedBook;
-        }
-      },
-      error => {
-        console.error('Error returning book:', error);
+  
+  // book-list.component.ts
+returnBook(book: Book): void {
+  console.log('Returning book:', book.title, 'Current stock:', book.stock);
+  
+  this.borrowingService.returnBook(book).subscribe({
+    next: (updatedBook) => {
+      console.log('Book returned, new stock:', updatedBook.stock);
+      
+      // Update the book in the books array
+      const index = this.books.findIndex(b => b.id === updatedBook.id);
+      if (index !== -1) {
+        this.books[index] = updatedBook;
       }
-    );
-  }
+      
+      // Also update in filteredBooks if it exists there
+      const filteredIndex = this.filteredBooks.findIndex(b => b.id === updatedBook.id);
+      if (filteredIndex !== -1) {
+        this.filteredBooks[filteredIndex] = updatedBook;
+      }
+      
+      // If the book is currently selected in the modal, update that reference too
+      if (this.selectedBook && this.selectedBook.id === updatedBook.id) {
+        this.selectedBook = updatedBook;
+      }
+      
+      // Show success message
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Book Returned',
+        detail: `"${updatedBook.title}" has been returned successfully.`
+      });
+      
+      // Force change detection if needed
+      // this.changeDetectorRef.detectChanges();
+    },
+    error: (error) => {
+      console.error('Error returning book', error);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to return the book. Please try again.'
+      });
+    }
+  });
+}
+
+
 
   toggleFavorite(book: Book): void {
     this.wishlistService.toggleFavorite(book).subscribe({

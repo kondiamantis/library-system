@@ -45,7 +45,7 @@
                     [label]="isBookBorrowed(book) ? 'Return' : 'Borrow'" 
                     [icon]="isBookBorrowed(book) ? 'pi pi-reply' : 'pi pi-shopping-cart'" 
                     [class]="isBookBorrowed(book) ? 'p-button-outlined' : 'p-button'"
-                    (click)="isBookBorrowed(book) ? '' : borrowBook(book)"></button>
+                    (click)="isBookBorrowed(book) ? returnBook(book) : borrowBook(book)"></button>
                     
             <button pButton 
                     icon="pi pi-heart-fill" 

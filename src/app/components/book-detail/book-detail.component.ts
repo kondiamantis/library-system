@@ -106,7 +106,7 @@ export class BookDetailComponent implements OnInit {
     
     if (borrowIndex === -1) return;
     
-    this.borrowingService.returnBook(this.book, borrowIndex).subscribe({
+    this.borrowingService.returnBook(this.book).subscribe({
       next: (updatedBook) => {
         this.book = updatedBook;
         this.messageService.add({
