@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, map, catchError, tap } from 'rxjs';
 import { Book } from '../interfaces/book';
 import { BorrowingService } from './borrowing.service';
+import { environment } from '../../../environments/environment-dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WishlistService {
-  private apiUrl = 'http://localhost:3000/books';
+  private apiUrl = `${environment.apiUrl}/books`;
   currentUserId = 1; // Hardcoded for demo
 
   constructor(

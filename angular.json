@@ -58,6 +58,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+          "buildTarget": "library-system:build",
+          "proxyConfig": "proxy.conf.json"
+        },
           "configurations": {
             "production": {
               "buildTarget": "library-system:build:production"

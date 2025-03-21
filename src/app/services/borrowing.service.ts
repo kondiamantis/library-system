@@ -5,13 +5,14 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { Book, BorrowStatus } from '../interfaces/book';
 import { MessageService } from 'primeng/api';
+import { environment } from '../../../environments/environment-dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BorrowingService {
   private borrowedBooks = new BehaviorSubject<Book[]>([]);
-  private apiUrl = 'http://localhost:3000/books'; // json-server URL 
+  private apiUrl = `${environment.apiUrl}/books`;  
   
   // Mock user ID (replace with actual user authentication)
   currentUserId = 1;
