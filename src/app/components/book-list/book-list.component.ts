@@ -16,6 +16,7 @@ import {ToastModule} from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { WishlistService } from '../../services/wishlist.service';
 import { Router } from '@angular/router';
+import { RatingModule } from 'primeng/rating';
 
 @Component({
   selector: 'app-book-list',
@@ -32,7 +33,8 @@ import { Router } from '@angular/router';
     DialogModule,
     InputTextModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    RatingModule
   ],
   providers: [MessageService]
 })
@@ -74,6 +76,21 @@ export class BookList implements OnInit {
   ngOnInit(): void {
     this.loadBooks();
   }
+
+  rateBook(book: Book, newRating: number): void {
+    this.bookService.updateBookRating(book.id, newRating).subscribe({
+      next: (updatedBook) => {
+        // Update the book in the local list
+        book.rating = updatedBook.rating;
+        book.ratingCount = updatedBook.ratingCount;
+        console.log(`Rating for "${book.title}" updated to ${book.rating}`);
+      },
+      error: (err) => {
+        console.error('Failed to update rating:', err);
+      },
+    });
+  }
+
 
   viewBookDetails(book: Book) {
     this.router.navigate(['/books', book.id]);

@@ -11,7 +11,8 @@ export interface Book {
     publishedYear: number;
     stock: number;
     status?: 'available' | 'borrowed';
-    
+    rating: number;
+    ratingCount: number;
 }
 
 export interface BorrowStatus {

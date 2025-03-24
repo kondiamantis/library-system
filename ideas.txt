@@ -14,11 +14,11 @@ Feature Enhancements & Improvements (check)
 🚨 Notify users when a book is overdue.
 🔥 How? Add a "Book Now" button that changes status & updates stock.
 
-4️⃣ Wishlist or Favorite Books
+4️⃣ Wishlist or Favorite Books (check)
 💖 Let users save books to a "Favorites" list for future reference.
 🔥 How? Store favorite books in local storage or a user profile in the backend.
 
-5️⃣ Book Ratings & Reviews
+5️⃣ Book Ratings & Reviews (check for the rating only)
 ⭐ Users can rate books (1-5 stars) and leave reviews.
 🏆 Display top-rated books in a separate section.
 🔥 How? Use PrimeNG Rating (p-rating) and store reviews in a database.

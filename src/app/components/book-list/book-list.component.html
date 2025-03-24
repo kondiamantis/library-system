@@ -31,18 +31,24 @@
       <th>Author</th>
       <th>Genre</th>
       <th>Published Year</th>
-      <th>Description</th>
+      <th>Rating</th>
       <th>Stock</th>
       <th>Action</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-book>
-    <tr (click)="showBookDetails(book)">
-      <td>{{ book.title }}</td>
+    <tr>
+      <td>{{ book.title }} 
+        <button pButton icon="pi pi-info-circle" class="p-button-sm p-button-outlined" 
+        (click)="showBookDetails(book); $event.stopPropagation()">
+        </button>
+      </td>
       <td>{{ book.author }}</td>
       <td>{{ book.genre }}</td>
       <td>{{ book.publishedYear }}</td>
-      <td>{{ book.description }}</td>
+      <td>
+        <p-rating [(ngModel)]="book.rating" (onRate)="rateBook(book, $event.value)"></p-rating>
+      </td>
       <td>
         <span [ngClass]="book.stock > 0 ? 'text-green-600' : 'text-red-600'">
           {{ book.stock }}
@@ -58,8 +64,7 @@
             (click)="toggleFavorite(book); $event.stopPropagation()"
             pTooltip="{{isBookFavorited(book) ? 'Remove from wishlist' : 'Add to wishlist'}}">
           </button>
-            
-          
+        
           <!-- Existing buttons -->
           <div *ngIf="isBookBorrowed(book)" class="borrowed-status">
             <span [ngClass]="isBookOverdue(book) ? 'overdue-tag' : 'borrowed-tag'">
@@ -80,7 +85,7 @@
 </p-table>
 
 <!-- Modal for Book Details -->
-<p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true">
+<p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true" [dismissableMask]="true">
   <div *ngIf="selectedBook" class="book-detail-container">
     <img [src]="getBookCover(selectedBook)" alt="Book Cover" class="book-cover"/>
     <h3>{{ selectedBook.title }}</h3>
@@ -93,6 +98,7 @@
         {{ selectedBook.stock }}
       </span>
     </p>
+    <p><strong>Rating:</strong> {{selectedBook.rating}}</p>
     
     <div class="borrow-section">
       <div *ngIf="isBookBorrowed(selectedBook)" class="borrowed-status">

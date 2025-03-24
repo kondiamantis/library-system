@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Book } from '../interfaces/book';
-import { environment } from '../../../environments/environment-dev';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = `${environment.apiUrl}/books`;
+  private apiUrl = 'http://localhost:3000/books';
 
   constructor(private http: HttpClient) {}
 
@@ -21,15 +19,12 @@ export class BookService {
     return this.http.get<Book>(`${this.apiUrl}/${id}`);
   }
 
-  updateBookStock(id: number, stock: number): Observable<Book> {
-    return this.http.patch<Book>(`${this.apiUrl}/${id}`, { stock });
-  }
 
   // src/app/services/book-service.service.ts
   // Add these methods to your existing BookService
 
 updateBook(book: Book): Observable<Book> {
-  return this.http.put<Book>(`${this.apiUrl}/${book.id}`, book);
+  return this.http.patch<Book>(`${this.apiUrl}/${book.id}`, book);
 }
 
 isBookBorrowedByUser(book: Book, userId: number): boolean {
@@ -50,6 +45,31 @@ isBookOverdue(book: Book, userId: number): boolean {
   if (!userBorrow) return false;
   
   return new Date(userBorrow.dueDate) < new Date();
+}
+
+updateBookRating(bookId: number, newRating: number): Observable<Book> {
+  // Step 1: Fetch the book by ID
+  return this.getBookById(bookId).pipe(
+    switchMap((book) => {
+      // Step 2: Calculate the new average rating
+      const updatedRatingCount = (book.ratingCount || 0) + 1;
+      const updatedRating = newRating;
+
+      // Step 3: Update the book object
+      const updatedBook = {
+        ...book,
+        rating: updatedRating,
+        ratingCount: updatedRatingCount,
+      };
+
+      // Step 4: Send the updated book back to the server
+      return this.updateBook(updatedBook);
+    })
+  );
+}
+
+updateBookStock(id: number, stock: number): Observable<Book> {
+  return this.http.patch<Book>(`${this.apiUrl}/${id}`, { stock });
 }
 
 }
