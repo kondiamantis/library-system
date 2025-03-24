@@ -24,10 +24,11 @@
   <p-button [icon]="themeIcon" (onClick)="toggleDarkMode()" class="dark-mode-toggle"/>
 </div>
 
-<p-table [value]="filteredBooks" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" responsiveLayout="scroll" [showCurrentPageReport]="true" class="p-datatable-sm">
+<p-table [value]="filteredBooks" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" 
+  responsiveLayout="scroll" [showCurrentPageReport]="true" class="p-datatable-sm">
   <ng-template pTemplate="header">
     <tr>
-      <th>Title</th>
+      <th pSortableColumn="title" >Title <p-sortIcon field="title" /></th>
       <th>Author</th>
       <th>Genre</th>
       <th>Published Year</th>

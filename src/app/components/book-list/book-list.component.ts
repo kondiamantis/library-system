@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BookService } from '../../services/book-service.service';
 import { Book } from '../../interfaces/book';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -17,6 +17,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { WishlistService } from '../../services/wishlist.service';
 import { Router } from '@angular/router';
 import { RatingModule } from 'primeng/rating';
+import { SortEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-book-list',
@@ -40,9 +41,12 @@ import { RatingModule } from 'primeng/rating';
 })
 
 export class BookListComponent implements OnInit {
+
+  
   books: Book[] = []
   filteredBooks: Book[] = [];
   searchText: string = '';
+  
   
   // Simple string array for genres
   genres: string[] = [
@@ -76,6 +80,8 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
     this.loadBooks();
   }
+
+
 
   rateBook(book: Book, newRating: number): void {
     this.bookService.updateBookRating(book.id, newRating).subscribe({
