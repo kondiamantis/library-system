@@ -39,7 +39,7 @@ import { RatingModule } from 'primeng/rating';
   providers: [MessageService]
 })
 
-export class BookList implements OnInit {
+export class BookListComponent implements OnInit {
   books: Book[] = []
   filteredBooks: Book[] = [];
   searchText: string = '';

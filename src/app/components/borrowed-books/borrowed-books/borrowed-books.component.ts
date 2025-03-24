@@ -5,7 +5,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { Book } from '../../../interfaces/book';
 import { BorrowingService } from '../../../services/borrowing.service';
-import { BookList } from '../../book-list/book-list.component';
+import { BookListComponent } from '../../book-list/book-list.component';
 import { MessageService } from 'primeng/api';
 
 @Component({

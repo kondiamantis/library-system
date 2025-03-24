@@ -148,6 +148,23 @@ body.dark-mode .p-dropdown-item:hover {
 /* Book detail container */
 .book-detail-container {
   position: relative;
+  width: 60vh;
+}
+
+.book-detail-container p,h3{
+  text-align: center;
+}
+
+.book-detail-container p-rating{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bookNowModal{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .borrow-section {

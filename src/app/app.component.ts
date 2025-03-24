@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BookList } from "./components/book-list/book-list.component";
+import { BookListComponent } from "./components/book-list/book-list.component";
 import { ToastModule } from 'primeng/toast';
 import { BorrowedBooksComponent } from './components/borrowed-books/borrowed-books/borrowed-books.component';
 import { MenuItem } from 'primeng/api';
@@ -13,7 +13,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 @Component({
   selector: 'app-root',
-  imports: [BookList, 
+  imports: [BookListComponent, 
             ToastModule, 
             TabMenuModule,
             BorrowedBooksComponent, 

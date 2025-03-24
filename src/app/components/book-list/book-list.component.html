@@ -92,7 +92,7 @@
     <p><strong>Author:</strong> {{ selectedBook.author }}</p>
     <p><strong>Genre:</strong> {{ selectedBook.genre }}</p>
     <p><strong>Published Year:</strong> {{ selectedBook.publishedYear }}</p>
-    <p><strong>Description:</strong> {{ selectedBook.description }}</p>
+    <!-- <p><strong>Description:</strong> {{ selectedBook.description }}</p> -->
     <p><strong>Stock:</strong> 
       <span [ngClass]="selectedBook.stock > 0 ? 'text-green-600' : 'text-red-600'">
         {{ selectedBook.stock }}
@@ -113,7 +113,7 @@
                 (click)="returnBook(selectedBook)"></button>
       </div>
       <button *ngIf="!isBookBorrowed(selectedBook)" pButton label="Book Now" icon="pi pi-shopping-cart" 
-        class="p-button-success" [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
+        class="p-button-success bookNowModal"  [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
     </div>
     <button pButton 
         [icon]="isBookFavorited(selectedBook) ? 'pi pi-heart-fill' : 'pi pi-heart'" 
