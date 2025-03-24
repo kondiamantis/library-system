@@ -10,6 +10,9 @@ import { MessageService } from 'primeng/api';
 import { Book } from '../../interfaces/book';
 import { WishlistService } from '../../services/wishlist.service';
 import { BorrowingService } from '../../services/borrowing.service';
+import { RatingModule } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
+import { BookService } from '../../services/book-service.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -20,7 +23,9 @@ import { BorrowingService } from '../../services/borrowing.service';
     TableModule,
     CardModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    RatingModule,
+    FormsModule
   ],
   providers: [MessageService],
   templateUrl: './wishlist.component.html',
@@ -36,13 +41,27 @@ export class WishlistComponent implements OnInit {
   constructor(
     private wishlistService: WishlistService,
     private borrowingService: BorrowingService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private bookService: BookService
   ) {}
   
   ngOnInit(): void {
     this.loadFavoriteBooks();
   }
   
+  rateBook(book: Book, newRating: number): void {
+    this.bookService.updateBookRating(book.id, newRating).subscribe({
+      next: (updatedBook) => {
+        // Update the book in the local list
+        book.rating = updatedBook.rating;
+        book.ratingCount = updatedBook.ratingCount;
+        // console.log(`Rating for "${book.title}" updated to ${book.rating}`);
+      },
+      error: (err) => {
+        console.error('Failed to update rating:', err);
+      },
+    });
+  }
   
   loadFavoriteBooks(): void {
     this.loading = true;

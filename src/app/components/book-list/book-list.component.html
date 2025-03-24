@@ -98,7 +98,9 @@
         {{ selectedBook.stock }}
       </span>
     </p>
-    <p><strong>Rating:</strong> {{selectedBook.rating}}</p>
+    <p>
+      <p-rating [(ngModel)]="selectedBook.rating" [readonly]="true"></p-rating>
+    </p>
     
     <div class="borrow-section">
       <div *ngIf="isBookBorrowed(selectedBook)" class="borrowed-status">

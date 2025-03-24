@@ -37,6 +37,9 @@
           <div *ngIf="book.genre" class="book-genre">
             <span class="genre-badge">{{ book.genre }}</span>
           </div>
+          <div>
+            <p-rating [(ngModel)]="book.rating" (onRate)="rateBook(book, $event.value)"></p-rating>
+          </div>
         </div>
         
         <ng-template pTemplate="footer">

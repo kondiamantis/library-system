@@ -83,7 +83,7 @@ export class BookList implements OnInit {
         // Update the book in the local list
         book.rating = updatedBook.rating;
         book.ratingCount = updatedBook.ratingCount;
-        console.log(`Rating for "${book.title}" updated to ${book.rating}`);
+        // console.log(`Rating for "${book.title}" updated to ${book.rating}`);
       },
       error: (err) => {
         console.error('Failed to update rating:', err);

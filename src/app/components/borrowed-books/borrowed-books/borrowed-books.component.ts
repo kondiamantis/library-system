@@ -24,23 +24,23 @@ export class BorrowedBooksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('BorrowedBooksComponent initialized');
+    // console.log('BorrowedBooksComponent initialized');
     this.loadBorrowedBooks();
   }
 
   loadBorrowedBooks(): void {
     this.loading = true;
-    console.log('Loading borrowed books...');
+    // console.log('Loading borrowed books...');
     
     this.borrowingService.getBooks().subscribe({
       next: (books) => {
-        console.log('Received books from API:', books.length);
+        // console.log('Received books from API:', books.length);
         
         this.borrowedBooks = books.filter(book => 
           this.borrowingService.isBookBorrowedByUser(book)
         );
         
-        console.log('Filtered borrowed books count:', this.borrowedBooks.length);
+        // console.log('Filtered borrowed books count:', this.borrowedBooks.length);
         this.loading = false;
       },
       error: (error) => {
