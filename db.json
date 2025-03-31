@@ -24,7 +24,7 @@
       "description": "A story of a totalitarian future society.",
       "stock": 13,
       "isbn": "978-0-452-28423-4",
-      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "coverImage": "a",
       "favorited": [],
       "borrowed": [],
       "rating": 4,
@@ -172,6 +172,20 @@
       ],
       "rating": 0,
       "ratingCount": 0
+    },
+    {
+      "id": "91fb",
+      "title": "Add Book",
+      "author": "Diamantis",
+      "genre": "Fiction",
+      "publishedYear": 1996,
+      "stock": 9,
+      "isbn": "",
+      "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
+      "favorited": [],
+      "borrowed": [],
+      "rating": 3,
+      "ratingCount": 1
     }
   ]
 }

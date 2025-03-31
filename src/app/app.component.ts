@@ -10,17 +10,18 @@ import { CommonModule } from '@angular/common';
 import { TabViewModule } from 'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { AddBookComponent } from "./components/add-book/add-book.component";
 
 @Component({
   selector: 'app-root',
-  imports: [BookListComponent, 
-            ToastModule, 
-            TabMenuModule,
-            BorrowedBooksComponent, 
-            CommonModule, 
-            TabViewModule, 
-            ButtonModule, 
-          WishlistComponent],
+  imports: [BookListComponent,
+    ToastModule,
+    TabMenuModule,
+    BorrowedBooksComponent,
+    CommonModule,
+    TabViewModule,
+    ButtonModule,
+    WishlistComponent, AddBookComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -51,6 +52,11 @@ export class AppComponent implements OnInit {
         label: 'My Wishlist',
         icon: 'pi pi-heart',
         command: () => this.showTab('wishlist')
+      },
+      {
+        label: 'Add Book',
+        icon: 'pi pi-plus',
+        command: () => this.showTab('add-book')
       }
     ];
 

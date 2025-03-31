@@ -1,0 +1,18 @@
+<div class="add-book-container">
+  <h2>Add a New Book</h2>
+  <form (ngSubmit)="onSubmit()" #bookForm="ngForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" [(ngModel)]="newBook.title" required />
+      <label for="author">Author</label>
+      <input type="text" id="author" name="author" [(ngModel)]="newBook.author" required />
+      <label for="genre">Genre</label>
+      <input type="text" id="genre" name="genre" [(ngModel)]="newBook.genre" required />
+      <label for="publishedYear">Published Year</label>
+      <input type="number" id="publishedYear" name="publishedYear" [(ngModel)]="newBook.publishedYear" required />
+      <label for="stock">Stock</label>
+      <input type="number" id="stock" name="stock" [(ngModel)]="newBook.stock" required />
+      <button type="submit" pButton label="Add Book" class="p-button-success"></button>
+    </div>
+  </form>
+</div>
