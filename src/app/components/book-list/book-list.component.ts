@@ -17,7 +17,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { WishlistService } from '../../services/wishlist.service';
 import { Router } from '@angular/router';
 import { RatingModule } from 'primeng/rating';
-import { SortEvent } from 'primeng/api';
+import { InputTextarea } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-book-list',
@@ -35,12 +36,15 @@ import { SortEvent } from 'primeng/api';
     InputTextModule,
     ToastModule,
     TooltipModule,
-    RatingModule
+    RatingModule,
+    InputTextarea,
+    InputNumberModule
   ],
   providers: [MessageService]
 })
 
 export class BookListComponent implements OnInit {
+
 
   
   books: Book[] = []
@@ -65,9 +69,11 @@ export class BookListComponent implements OnInit {
   selectedGenre: string = '';
   selectedStock: boolean = false;
   selectedBook: Book | null = null;
-  displayModal: boolean = false;
+  displayInfoModal: boolean = false;
+  displayEditModal: boolean = false;
   isDarkMode: boolean = false;
   themeIcon: string = 'pi pi-moon';
+  editBookCopy!: Book; // Copy of the book to be edited
 
   constructor(
     private router: Router,
@@ -173,7 +179,14 @@ export class BookListComponent implements OnInit {
 
   showBookDetails(book: Book): void {
     this.selectedBook = book;
-    this.displayModal = true;
+    this.displayInfoModal = true;
+  }
+
+  showEditBookDetails(book: Book): void {
+    this.selectedBook = book;
+    // Create a deep copy to avoid modifying the original book until save is clicked
+    this.editBookCopy = JSON.parse(JSON.stringify(book));
+    this.displayEditModal = true;
   }
 
   toggleDarkMode() {
@@ -195,7 +208,7 @@ export class BookListComponent implements OnInit {
             this.books[index] = updatedBook;
             this.filteredBooks = [...this.filteredBooks]; // Force refresh
           }
-          this.displayModal = false;
+          this.displayInfoModal = false;
         }
       );
     }
@@ -321,5 +334,47 @@ returnBook(book: Book): void {
   isBookFavorited(book: Book): boolean {
     return this.wishlistService.isBookFavorited(book);
   }
+
+  // Method to save book changes
+saveBookChanges(): void {
+  this.bookService.updateBook(this.editBookCopy).subscribe({
+    next: (updatedBook) => {
+      // Update the book in the filtered books array
+      const index = this.filteredBooks.findIndex(book => book.id === updatedBook.id);
+      if (index !== -1) {
+        this.filteredBooks[index] = updatedBook;
+      }
+      
+      // Also update in the main books array
+      const mainIndex = this.books.findIndex(book => book.id === updatedBook.id);
+      if (mainIndex !== -1) {
+        this.books[mainIndex] = updatedBook;
+      }
+      
+      // Show success message
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: `"${updatedBook.title}" has been updated successfully.`
+      });
+      
+      // Close the modal
+      this.displayEditModal = false;
+    },
+    error: (error) => {
+      console.error('Error updating book:', error);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to update book. Please try again.'
+      });
+    }
+  });
+}
+
+// Method to cancel editing
+cancelEdit(): void {
+  this.displayEditModal = false;
+}
 
 }

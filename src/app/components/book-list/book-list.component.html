@@ -43,6 +43,9 @@
         <button pButton icon="pi pi-info-circle" class="p-button-sm p-button-outlined" 
         (click)="showBookDetails(book); $event.stopPropagation()">
         </button>
+        <button pButton icon="pi pi-pencil" class="p-button-sm p-button-outlined edit-button" 
+        (click)="showEditBookDetails(book); $event.stopPropagation()">
+        </button>
       </td>
       <td>{{ book.author }}</td>
       <td>{{ book.genre }}</td>
@@ -78,7 +81,9 @@
           </div>
           <button *ngIf="!isBookBorrowed(book)" pButton label="Book Now" icon="pi pi-shopping-cart" 
                   class="p-button-sm p-button-success" [disabled]="book.stock === 0"
-                  (click)="showBookDetails(book); $event.stopPropagation()"></button>
+                  (click)="showBookDetails(book); $event.stopPropagation()"
+                  >
+                </button>
         </div>
       </td>
     </tr>
@@ -86,7 +91,7 @@
 </p-table>
 
 <!-- Modal for Book Details -->
-<p-dialog header="Book Details" [(visible)]="displayModal" [modal]="true" [closable]="true" [dismissableMask]="true">
+<p-dialog header="Book Details" [(visible)]="displayInfoModal" [modal]="true" [closable]="true" [dismissableMask]="true">
   <div *ngIf="selectedBook" class="book-detail-container">
     <img [src]="getBookCover(selectedBook)" alt="Book Cover" class="book-cover"/>
     <h3>{{ selectedBook.title }}</h3>
@@ -124,4 +129,33 @@
         pTooltip="{{isBookFavorited(selectedBook) ? 'Remove from wishlist' : 'Add to wishlist'}}">
     </button>
   </div>
+</p-dialog>
+<p-dialog header="Edit Book" [(visible)]="displayEditModal" modal="true" [closable]="true" [dismissableMask]="true">
+  <div *ngIf="selectedBook" class="edit-book-container">
+    <form (ngSubmit)="saveBookChanges()" #editBookForm="ngForm">
+      <div class="edit-form-group">
+        <label for="editTitle">Title</label>
+        <input pInputText id="editTitle" name="title" [(ngModel)]="editBookCopy.title" required />
+        <label for="editAuthor">Author</label>
+        <input pInputText id="editAuthor" name="author" [(ngModel)]="editBookCopy.author" required />
+        <label for="editGenre">Genre</label>
+        <input pInputText id="editGenre" name="genre" [(ngModel)]="editBookCopy.genre" required />
+        <label for="editDescription">Description</label>
+        <textarea pInputTextarea id="editDescription" name="description" [(ngModel)]="editBookCopy.description" rows="3"></textarea>
+        <label for="editPublishedYear">Published Year</label>
+        <p-inputNumber id="editPublishedYear" name="publishedYear" [(ngModel)]="editBookCopy.publishedYear" [min]="1000" [max]="2024" required></p-inputNumber>
+        <label for="editStock">Stock</label>
+        <p-inputNumber id="editStock" name="stock" [(ngModel)]="editBookCopy.stock" [min]="0" required></p-inputNumber>
+        <label for="editCoverImage">Cover Image URL (optional)</label>
+        <input pInputText id="editCoverImage" name="coverImage" [(ngModel)]="editBookCopy.coverImage" />
+        <label for="editISBN">ISBN</label>
+        <input pInputText id="editISBN" name="isbn" [(ngModel)]="editBookCopy.isbn" />
+      </div>
+      <div class="dialog-footer">
+        <button pButton type="button" label="Cancel" class="p-button-outlined p-button-secondary" (click)="cancelEdit()"></button>
+        <button pButton type="submit" label="Save Changes" class="p-button-success" [disabled]="!editBookForm.form.valid"></button>
+      </div>
+    </form>
+  </div>
+
 </p-dialog>

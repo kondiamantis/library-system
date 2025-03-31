@@ -263,3 +263,49 @@ html.my-app-dark .borrowed-tag {
 .heart-button.p-button-danger:not(:active) {
   animation: heartBeat 0.6s;
 }
+
+/* Edit book form styling */
+.edit-book-container {
+  min-width: 400px;
+}
+
+.edit-book-container .form-group {
+  margin-bottom: 1rem;
+}
+
+.edit-book-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.edit-book-container input,
+.edit-book-container textarea {
+  width: 100%;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Make sure PrimeNG components take full width */
+.edit-book-container ::ng-deep .p-inputtext,
+.edit-book-container ::ng-deep .p-inputnumber,
+.edit-book-container ::ng-deep .p-inputtextarea {
+  width: 100%;
+}
+
+.edit-button{
+  color: orange;
+  border-color: orange;
+  /* border-radius: 0%; */
+}
+
+.edit-button:hover{
+  background-color: orange;
+  color: white;
+  border-color: orange;
+}

@@ -2,7 +2,7 @@
   "books": [
     {
       "id": "1",
-      "title": "The Great Gatsby",
+      "title": "The first editable book",
       "author": "F. Scott Fitzgerald",
       "genre": "Classic Fiction",
       "publishedYear": 1925,

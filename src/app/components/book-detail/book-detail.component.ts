@@ -31,7 +31,7 @@ export class BookDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private borrowingService: BorrowingService,
-    private wishlistService: WishlistService, // Inject WishlistService
+    private wishlistService: WishlistService,
     private messageService: MessageService
   ) {}
   
