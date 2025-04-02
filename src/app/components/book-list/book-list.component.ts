@@ -73,7 +73,17 @@ export class BookListComponent implements OnInit {
   displayEditModal: boolean = false;
   isDarkMode: boolean = false;
   themeIcon: string = 'pi pi-moon';
-  editBookCopy!: Book; // Copy of the book to be edited
+  editBookCopy: Book = {
+    id: 0,
+    title: '',
+    author: '',
+    genre: '',
+    isbn: '',
+    publishedYear: 0,
+    stock: 0,
+    rating: 0,
+    ratingCount: 0
+  }; // Copy of the book to be edited
 
   constructor(
     private router: Router,

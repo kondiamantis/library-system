@@ -12,7 +12,9 @@
       <input type="number" id="publishedYear" name="publishedYear" [(ngModel)]="newBook.publishedYear" required />
       <label for="stock">Stock</label>
       <input type="number" id="stock" name="stock" [(ngModel)]="newBook.stock" required />
-      <button type="submit" pButton label="Add Book" class="p-button-success"></button>
+      <div class="button-footer">
+        <button type="submit" pButton label="Add Book" class="p-button-success"></button>
+      </div>
     </div>
   </form>
 </div>

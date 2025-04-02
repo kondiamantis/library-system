@@ -37,21 +37,21 @@ input:focus, select:focus {
 
 /* Button styling */
 button {
-  display: inline-block;
+  /* display: inline-block; */
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: bold;
   color: #ffffff;
-  background-color: #007ad9;
+  /* background-color: #007ad9; */
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  /* cursor: pointer; */
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+/* button:hover {
   background-color: #005bb5;
-}
+} */
 
 /* Add consistent spacing */
 .add-book-container h2 {
@@ -64,4 +64,10 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.button-footer{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
