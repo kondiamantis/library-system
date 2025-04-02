@@ -10,21 +10,21 @@ body {
   }
   
   /* Dark mode */
-  body.dark-mode {
+  /* body.dark-mode {
     background-color: #121212;
     color: #e0e0e0;
-  }
+  } */
   
   /* Handle dark mode with system preference */
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     body:not(.dark-mode) {
       background-color: #121212;
       color: #e0e0e0;
     }
-  }
+  } */
   
   /* PrimeNG dark mode overrides */
-  body.dark-mode .p-component,
+  /* body.dark-mode .p-component,
   body.dark-mode .p-component-overlay {
     --surface-a: #121212;
     --surface-b: #1e1e1e;
@@ -36,10 +36,10 @@ body {
     --text-color-secondary: #aaaaaa;
     --primary-color: #7986cb;
     --primary-color-text: #ffffff;
-  }
+  } */
   
   /* Handle PrimeNG with system preference */
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     body:not(.dark-mode) .p-component,
     body:not(.dark-mode) .p-component-overlay {
       --surface-a: #121212;
@@ -53,5 +53,5 @@ body {
       --primary-color: #7986cb;
       --primary-color-text: #ffffff;
     }
-  }
+  } */
   

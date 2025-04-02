@@ -21,7 +21,7 @@
   <p-button label="Reset" [raised]="true" severity="danger" (click)="resetFilters()"/>
   
   <!-- Dark Mode Toggle -->
-  <p-button [icon]="themeIcon" (onClick)="toggleDarkMode()" class="dark-mode-toggle"/>
+  <!-- <p-button [icon]="themeIcon" (onClick)="toggleDarkMode()" class="dark-mode-toggle"/> -->
 </div>
 
 <p-table [value]="filteredBooks" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" 
@@ -39,13 +39,17 @@
   </ng-template>
   <ng-template pTemplate="body" let-book>
     <tr>
-      <td>{{ book.title }} 
-        <button pButton icon="pi pi-info-circle" class="p-button-sm p-button-outlined" 
-        (click)="showBookDetails(book); $event.stopPropagation()">
-        </button>
-        <button pButton icon="pi pi-pencil" class="p-button-sm p-button-outlined edit-button" 
-        (click)="showEditBookDetails(book); $event.stopPropagation()">
-        </button>
+      <td >{{ book.title }} 
+        <span class="title-buttons">
+          <button pButton icon="pi pi-info-circle" class="p-button-sm p-button-outlined" 
+          (click)="showBookDetails(book); $event.stopPropagation()">
+          </button>
+          <button pButton icon="pi pi-pencil" class="p-button-sm p-button-outlined" 
+          severity="warn" [outlined]="true"
+          (click)="showEditBookDetails(book); $event.stopPropagation()">
+          </button>
+        </span>
+        
       </td>
       <td>{{ book.author }}</td>
       <td>{{ book.genre }}</td>
@@ -91,9 +95,16 @@
 </p-table>
 
 <!-- Modal for Book Details -->
-<p-dialog header="Book Details" [(visible)]="displayInfoModal" [modal]="true" [closable]="true" [dismissableMask]="true">
+<p-dialog header="Book Details" [(visible)]="displayInfoModal" [modal]="true" [closable]="true" [dismissableMask]="true" class="book-detail-dialog">
   <div *ngIf="selectedBook" class="book-detail-container">
     <img [src]="getBookCover(selectedBook)" alt="Book Cover" class="book-cover"/>
+    <button pButton 
+        [icon]="isBookFavorited(selectedBook) ? 'pi pi-heart-fill' : 'pi pi-heart'" 
+        class="p-button-rounded p-button-text heart-button favorite-btn"
+        [ngClass]="isBookFavorited(selectedBook) ? 'p-button-danger' : 'p-button-outlined p-button-danger'"
+        (click)="toggleFavorite(selectedBook)"
+        pTooltip="{{isBookFavorited(selectedBook) ? 'Remove from wishlist' : 'Add to wishlist'}}">
+    </button>
     <h3>{{ selectedBook.title }}</h3>
     <p><strong>Author:</strong> {{ selectedBook.author }}</p>
     <p><strong>Genre:</strong> {{ selectedBook.genre }}</p>
@@ -121,13 +132,6 @@
       <button *ngIf="!isBookBorrowed(selectedBook)" pButton label="Book Now" icon="pi pi-shopping-cart" 
         class="p-button-success bookNowModal"  [disabled]="selectedBook.stock === 0" (click)="bookNow()"></button>
     </div>
-    <button pButton 
-        [icon]="isBookFavorited(selectedBook) ? 'pi pi-heart-fill' : 'pi pi-heart'" 
-        class="p-button-rounded p-button-text heart-button favorite-btn"
-        [ngClass]="isBookFavorited(selectedBook) ? 'p-button-danger' : 'p-button-outlined p-button-danger'"
-        (click)="toggleFavorite(selectedBook)"
-        pTooltip="{{isBookFavorited(selectedBook) ? 'Remove from wishlist' : 'Add to wishlist'}}">
-    </button>
   </div>
 </p-dialog>
 <p-dialog header="Edit Book" [(visible)]="displayEditModal" modal="true" [closable]="true" [dismissableMask]="true">

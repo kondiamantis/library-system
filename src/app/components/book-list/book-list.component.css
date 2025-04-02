@@ -1,311 +1,332 @@
+/* General table styling */
 p-table {
-    width: 100%;
-  }
-  
-  p-table th {
-    /* background-color: #d81010; */
-    text-align: left;
-    padding: 10px;
-  }
-  
-  p-table td {
-    padding: 10px;
-    border-bottom: 1px solid #918f8f;
-  }
-  
-  
-  p-table .p-button-sm {
-    font-size: 0.8rem;
-    padding: 4px 8px;
-  }
-
- 
-  .filters {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    margin-bottom: 1rem;
-    justify-content: space-between;
-  }
-
-  .dark-mode-toggle{
-    display: none;
-  }
-
- 
-  .p-dropdown {
-    width: 200px;
-  }
-
-  
-.book-cover {
-  max-width: 200px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-top: 1rem;
 }
 
-
-/*Toggle dark mode configuration*/
-body {
-  background-color: white;
-  color: black;
-  transition: all 0.3s ease-in-out;
+.p-datatable .p-datatable-header {
+  background: #ffffff;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  padding: 1.25rem;
 }
 
-/* .p-button {
-  background-color: #3498db;
+.p-datatable .p-datatable-thead > tr > th {
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  border-color: #e9ecef;
+  padding: 1rem;
+  transition: background-color 0.3s;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.85rem 1rem;
+  border-color: #e9ecef;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background-color: rgba(52, 152, 219, 0.04);
+}
+
+.p-paginator {
+  background: #ffffff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Filters and actions bar */
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.filters .p-inputtext, 
+.filters .p-autocomplete,
+.filters .p-dropdown {
+  flex: 1;
+  min-width: 200px;
+  max-width: 380px;
+}
+
+.uniform-size {
+  height: 40px;
+}
+
+.minimal-input {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.minimal-input:focus,
+.minimal-input:focus-within {
   border-color: #3498db;
-  color: white;
-} */
-
-body.dark-mode {
-  background-color: #1e1e1e;
-  color: #ffffff;
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 }
 
-
-
-body.dark-mode .p-button {
-  background-color: #2c3e50;
-  color: white;
+.p-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body.dark-mode .p-dropdown, body.dark-mode .p-inputtext {
-  background-color: #333;
-  color: #e0e0e0;
-  border-color: #555;
+.p-button.p-button-sm {
+  height: 2rem;
+  padding: 0.25rem 0.65rem;
 }
 
-body.dark-mode .p-dropdown-item:hover {
-  background-color: #444;
+.book-detail-dialog{
+  width: 100%;
+  /* max-width: 600px; */
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.dark-mode .p-button {
-  background-color: #444;
-  color: white;
-  border: 1px solid #777;
+/* Book details styling */
+.book-detail-container {
+  padding: 1.5rem;
+  text-align: center;
 }
 
-.dark-mode .p-table {
-  background-color: #2a2a2a;
-  color: white;
+.book-cover {
+  max-width: 180px;
+  max-height: 260px;
+  margin: 0 auto 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.dark-mode .p-dialog {
-  background-color: #2a2a2a;
-  color: white;
+.book-detail-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
 }
 
-.dark-mode-toggle {
-  font-size: 1.2rem;
+.book-detail-container p {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
-/* Default Light Mode Table */
-.p-table thead th {
-  background-color: #706c6c;  /* Light gray */
-  color: black;
+.book-detail-container strong {
+  color: #566573;
 }
 
-/* Dark Mode Table */
-.dark-mode .p-table thead th {
-  background-color: #333; /* Darker shade */
-  color: white;
+.book-detail-container p-rating {
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0;
 }
 
-/* Borrowed status styling */
+/* Borrow section */
+.borrow-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .borrowed-status {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .borrowed-tag, .overdue-tag {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 
 .borrowed-tag {
-  background-color: #e1f0fb;
-  color: #3498db;
+  background-color: rgba(52, 152, 219, 0.15);
+  color: #2980b9;
 }
 
 .overdue-tag {
-  background-color: #fbe7e7;
-  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #c0392b;
 }
 
 .due-date {
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.85rem;
+  color: #7f8c8d;
 }
 
-/* Book detail container */
-.book-detail-container {
-  position: relative;
-  width: 60vh;
-}
-
-.book-detail-container p,h3{
-  text-align: center;
-}
-
-.book-detail-container p-rating{
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.bookNowModal{
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.borrow-section {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
-
-/* Dark mode styles */
-html.my-app-dark .borrowed-tag {
-  background-color: rgba(52, 152, 219, 0.2);
-  color: #3498db;
-}
-
-/* Style for the action buttons container */
+/* Action buttons */
 .action-buttons {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-/* Style for the heart button in the book details */
-.book-header {
-  position: relative;
+/* Heart button */
+.heart-button {
+  transition: transform 0.2s ease;
 }
 
-.favorite-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  z-index: 1;
+.heart-button:hover {
+  transform: scale(1.15);
 }
 
-/* Make sure the book cover has proper positioning */
-.book-cover {
-  max-width: 150px; /* Or any size you prefer */
-  max-height: 220px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 1rem auto; /* Center the image */
+.heart-button.p-button-danger .p-button-icon,
+.heart-button.p-button-outlined.p-button-danger .p-button-icon {
+  color: #e74c3c !important;
 }
 
 @keyframes heartBeat {
   0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.25); }
   100% { transform: scale(1); }
-}
-
-.heart-button.favorited:not(:active) {
-  animation: heartBeat 1s;
-}
-
-.heart-button {
-  transition: all 0.2s ease;
-}
-
-.heart-button:hover {
-  transform: scale(1.1);
-}
-
-.heart-button.p-button-danger .p-button-icon {
-  color: #e91e63 !important;
-  /* border-color: #e91e63 !important; */
-}
-
-.heart-button.p-button-outlined.p-button-danger .p-button-icon {
-  color: #e91e63 !important;
-  /* border-color: #e91e63 !important; */
-}
-
-
-/* Make the Book Now button green */
-.p-button-success {
-  background-color: #4caf50 !important;
-  border-color: #4caf50 !important;
-}
-
-.p-button-success:hover {
-  background-color: #388e3c !important;
-  border-color: #388e3c !important;
-}
-
-/* For dark mode */
-.dark-mode .p-button-success {
-  background-color: #2e7d32 !important;
-  border-color: #2e7d32 !important;
-}
-
-.dark-mode .p-button-success:hover {
-  background-color: #1b5e20 !important;
-  border-color: #1b5e20 !important;
 }
 
 .heart-button.p-button-danger:not(:active) {
   animation: heartBeat 0.6s;
 }
 
-/* Edit book form styling */
+
+/* Edit book form */
 .edit-book-container {
-  min-width: 400px;
+  min-width: 500px;
+  padding: 1rem;
 }
 
 .edit-book-container .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .edit-book-container label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  color: #566573;
 }
 
 .edit-book-container input,
 .edit-book-container textarea {
   width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.edit-book-container input:focus,
+.edit-book-container textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+  outline: none;
 }
 
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
-/* Make sure PrimeNG components take full width */
-.edit-book-container ::ng-deep .p-inputtext,
-.edit-book-container ::ng-deep .p-inputnumber,
-.edit-book-container ::ng-deep .p-inputtextarea {
-  width: 100%;
+.title-buttons{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.edit-button{
-  color: orange;
-  border-color: orange;
-  /* border-radius: 0%; */
+/* Dark mode adjustments */
+/* .dark-mode .p-datatable .p-datatable-thead > tr > th {
+  background: #343a40;
+  color: #e1e1e1;
+  border-color: #495057;
+} */
+
+/* .dark-mode .p-datatable .p-datatable-tbody > tr > td {
+  background: #283038;
+  color: #e1e1e1;
+  border-color: #495057;
 }
 
-.edit-button:hover{
-  background-color: orange;
-  color: white;
-  border-color: orange;
+.dark-mode .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: rgba(93, 173, 226, 0.07);
 }
+
+.dark-mode .p-paginator {
+  background: #283038;
+} */
+
+/* .dark-mode .filters {
+  background-color: #18181B;
+}
+
+.dark-mode .minimal-input {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #e1e1e1;
+}
+
+.dark-mode .minimal-input:focus,
+.dark-mode .minimal-input:focus-within {
+  border-color: #5dade2;
+  box-shadow: 0 0 0 0.2rem rgba(93, 173, 226, 0.25);
+}
+
+.dark-mode .book-detail-container h3 {
+  color: #e1e1e1;
+} */
+
+/* .dark-mode .book-detail-container strong {
+  color: #a0aec0;
+}
+
+.dark-mode .borrow-section {
+  border-top-color: #495057;
+}
+
+.dark-mode .borrowed-tag {
+  background-color: rgba(93, 173, 226, 0.2);
+  color: #5dade2;
+}
+
+.dark-mode .overdue-tag {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.dark-mode .due-date {
+  color: #a0aec0;
+}
+
+.dark-mode .edit-book-container label {
+  color: #a0aec0;
+}
+
+.dark-mode .edit-book-container input,
+.dark-mode .edit-book-container textarea {
+  background-color: #343a40;
+  border-color: #495057;
+  color: #e1e1e1;
+}
+
+.dark-mode .edit-book-container input:focus,
+.dark-mode .edit-book-container textarea:focus {
+  border-color: #5dade2;
+  box-shadow: 0 0 0 0.2rem rgba(93, 173, 226, 0.25);
+} */
