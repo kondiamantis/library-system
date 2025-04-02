@@ -46,14 +46,23 @@ p-table {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .filters .p-inputtext, 
 .filters .p-autocomplete,
 .filters .p-dropdown {
-  flex: 1;
+  flex: 1 1 300px;
   min-width: 200px;
-  max-width: 380px;
+  /* max-width: 380px; */
+}
+
+.filters .p-button {
+  flex: 0 0 auto; /* Don't grow or shrink */
+  align-self: stretch; /* Make buttons match height */
+  height: 40px; /* Match uniform-size height */
 }
 
 .uniform-size {
@@ -87,7 +96,7 @@ p-table {
   width: 100%;
   /* max-width: 600px; */
   margin: 0 auto;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);

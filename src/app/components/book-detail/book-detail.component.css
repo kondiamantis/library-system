@@ -2,7 +2,7 @@
 .book-detail-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 1rem;
+    /* padding: 1rem; */
   }
   
   .loading-spinner {
@@ -112,7 +112,7 @@
   }
   
   .book-actions {
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
   }
   
   .ml-2 {
