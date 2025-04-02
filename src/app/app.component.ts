@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { BookListComponent } from "./components/book-list/book-list.component";
 import { ToastModule } from 'primeng/toast';
 import { BorrowedBooksComponent } from './components/borrowed-books/borrowed-books/borrowed-books.component';
@@ -11,17 +11,17 @@ import { TabViewModule } from 'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { AddBookComponent } from "./components/add-book/add-book.component";
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [BookListComponent,
+  imports: [
     ToastModule,
     TabMenuModule,
-    BorrowedBooksComponent,
     CommonModule,
     TabViewModule,
     ButtonModule,
-    WishlistComponent, AddBookComponent],
+    RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -31,9 +31,17 @@ export class AppComponent implements OnInit {
   activeItem: MenuItem | undefined;
   isDarkMode= false;
   themeIcon = 'pi pi-moon';
+  activeRoute = 'books';
   
-  constructor() {
-    console.log('App component initialized');
+  constructor(private router: Router) {
+    // Listen to route changes to update active menu item
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.activeRoute = this.router.url.split('/')[1] || 'books';
+      this.activeTab = this.activeRoute;
+      this.updateActiveMenu();
+    });
   }
 
   ngOnInit() {
@@ -41,57 +49,67 @@ export class AppComponent implements OnInit {
       {
         label: 'Books',
         icon: 'pi pi-book',
-        command: () => this.showTab('books')
+        routerLink: '/books',
       },
       {
         label: 'My Borrowed Books',
         icon: 'pi pi-shopping-bag',
-        command: () => this.showTab('borrowed')
+        routerLink: '/borrowed',
       },
       {
         label: 'My Wishlist',
         icon: 'pi pi-heart',
-        command: () => this.showTab('wishlist')
+        routerLink: '/wishlist',
       },
       {
         label: 'Add Book',
         icon: 'pi pi-plus',
-        command: () => this.showTab('add-book')
+        routerLink: '/add-book',
       }
     ];
 
-    // Set initial active item
-    this.updateActiveItem();
+     
+   // Navigate to books path on initialization if the path is empty
+   if (this.router.url === '/') {
+    this.router.navigate(['/books']);
   }
 
-  private updateActiveItem() {
-    // Find and set the active item based on activeTab
-    const index = this.getActiveItemIndex();
-    if (this.items && this.items.length > index) {
-      this.activeItem = this.items[index];
-    }
+  // Update active menu based on current route
+    this.updateActiveMenu();
+  }
+
+  updateActiveMenu() {
+    // Update the active class for menu items
+    this.items.forEach(item => {
+      if (item.routerLink && item.routerLink.toString().includes(this.activeRoute)) {
+        item.styleClass = 'active-menu-item';
+      } else {
+        item.styleClass = '';
+      }
+    });
   }
   
-  showTab(tabName: string) {
-    this.activeTab = tabName;
-  }
+  // showTab(tabName: string) {
+  //   this.activeTab = tabName;
+  // }
 
-  getActiveItemIndex(): number {
-    switch (this.activeTab) {
-      case 'books': return 0;
-      case 'borrowed': return 1;
-      case 'wishlist': return 2;
-      default: return 0;
-    }
-  }
+  // getActiveItemIndex(): number {
+  //   switch (this.activeTab) {
+  //     case 'books': return 0;
+  //     case 'borrowed': return 1;
+  //     case 'wishlist': return 2;
+  //     case 'add-book': return 3;
+  //     default: return 0;
+  //   }
+  // }
 
-  toggleDarkMode() {
-    const element = document.querySelector('html');
-    if (element) {
-      element.classList.toggle('my-app-dark');
-      this.isDarkMode = element.classList.contains('my-app-dark');
-      this.themeIcon = this.isDarkMode ? 'pi pi-sun' : 'pi pi-moon';
-    }
-  }
+  // toggleDarkMode() {
+  //   const element = document.querySelector('html');
+  //   if (element) {
+  //     element.classList.toggle('my-app-dark');
+  //     this.isDarkMode = element.classList.contains('my-app-dark');
+  //     this.themeIcon = this.isDarkMode ? 'pi pi-sun' : 'pi pi-moon';
+  //   }
+  // }
 }
 
