@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { AddBookComponent } from "./components/add-book/add-book.component";
 import { filter } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +33,10 @@ export class AppComponent implements OnInit {
   isDarkMode= false;
   themeIcon = 'pi pi-moon';
   activeRoute = 'books';
+  isLoggedIn = false;
+  isInitializing = true;
   
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     // Listen to route changes to update active menu item
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -41,6 +44,9 @@ export class AppComponent implements OnInit {
       this.activeRoute = this.router.url.split('/')[1] || 'books';
       this.activeTab = this.activeRoute;
       this.updateActiveMenu();
+    });
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
     });
   }
 
@@ -72,6 +78,17 @@ export class AppComponent implements OnInit {
    // Navigate to books path on initialization if the path is empty
    if (this.router.url === '/') {
     this.router.navigate(['/books']);
+
+    // Check if user is authenticated first
+  this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+    this.isLoggedIn = isLoggedIn;
+    this.isInitializing = false;
+    
+    // If not logged in and not on login page, redirect
+    if (!isLoggedIn && !window.location.href.includes('/login')) {
+      this.router.navigate(['/login']);
+    }
+  });
   }
 
   // Update active menu based on current route
@@ -89,6 +106,10 @@ export class AppComponent implements OnInit {
     });
   }
   
+  logout(): void {
+    this.authService.logout();
+  }
+
   // showTab(tabName: string) {
   //   this.activeTab = tabName;
   // }

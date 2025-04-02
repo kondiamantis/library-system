@@ -1,0 +1,59 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .logo i {
+    font-size: 3rem;
+    color: #3498db;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .p-input-icon-left {
+    width: 100%;
+  }
+  
+  .p-input-icon-left i {
+    color: #6c757d;
+  }
+  
+  input {
+    width: 100%;
+  }
+  
+  :host ::ng-deep .p-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  /* Dark mode considerations */
+  :host-context(.dark-mode) .login-container {
+    background-color: #1a1d21;
+  }
+  
+  :host-context(.dark-mode) .logo i {
+    color: #5dade2;
+  }

@@ -1,0 +1,52 @@
+<div class="login-container">
+    <p-toast></p-toast>
+    
+    <p-card header="Library System Login" styleClass="login-card">
+      <div class="logo">
+        <i class="pi pi-book"></i>
+      </div>
+      
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input 
+              id="username" 
+              type="text" 
+              pInputText 
+              [(ngModel)]="username" 
+              name="username" 
+              required 
+              [disabled]="isLoading"
+              placeholder="Username">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="p-input-icon-left">
+            <i class="pi pi-lock"></i>
+            <input 
+              id="password" 
+              type="password" 
+              pPassword 
+              [feedback]="false" 
+              [(ngModel)]="password" 
+              name="password" 
+              required 
+              [disabled]="isLoading"
+              placeholder="Password">
+          </div>
+        </div>
+        
+        <button 
+          pButton 
+          type="submit" 
+          label="Login" 
+          [disabled]="loginForm.invalid || isLoading" 
+          [loading]="isLoading">
+        </button>
+      </form>
+    </p-card>
+  </div>

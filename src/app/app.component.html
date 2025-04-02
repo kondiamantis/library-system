@@ -1,17 +1,24 @@
 <!-- src/app/app.component.html -->
 <div class="app-container">
     <p-toast></p-toast>
-    
-    <div class="header">
-        
-      <h1>Library Management System</h1>
-        <div class="theme-toggle">
-            <!-- <p-button [icon]="themeIcon" (onClick)="toggleDarkMode()" class="dark-mode-toggle"/> -->
-        </div>
-    </div>
+    <header class="header" *ngIf="isLoggedIn">
+      <div class="logo-container">
+        <i class="pi pi-book logo"></i>
+        <h1>Library System</h1>
+      </div>
+      <button pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-sign-out"
+                  class="p-button-rounded p-button-text p-button-danger"
+                  pTooltip="Logout"
+                  label="Logout"
+                  (click)="logout()"></button>
+    </header>
     
     <!-- Use p-tabMenu component -->
-    <p-tabMenu [model]="items" [activeItem]="activeItem" styleClass="mb-3"></p-tabMenu>
+    <p-tabMenu [model]="items" [activeItem]="activeItem" styleClass="mb-3" *ngIf="isLoggedIn"></p-tabMenu>
+    
     
     <!-- Content area -->
     <div class="content-container">
