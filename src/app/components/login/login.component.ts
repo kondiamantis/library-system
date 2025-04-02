@@ -32,6 +32,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   isLoading: boolean = false;
+  passwordVisible: boolean = false;
   
   constructor(
     private authService: AuthService,
@@ -66,6 +67,13 @@ export class LoginComponent {
         console.error('Login error:', err);
       }
     });
+  }
+
+  //For the password visibility toggle
+  togglePasswordVisibility(passwordInput: HTMLInputElement): void {
+    // Toggle between 'password' and 'text' type
+    this.passwordVisible = !this.passwordVisible;
+    passwordInput.type = this.passwordVisible ? 'text' : 'password';
   }
 
 }
