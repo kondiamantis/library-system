@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 name: Build and Push Docker Images
-=======
-name: Build and Deploy Angular App
->>>>>>> docker-servers
 
 on:
   push:
-    branches: [ docker-servers ]
+    branches: [ develop ]
   pull_request:
     branches: [ develop ]
 
@@ -74,37 +70,4 @@ jobs:
           context: .
           file: ./Dockerfile.json-server
           push: true
-<<<<<<< HEAD
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:latest,${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:${{ github.sha }}
-=======
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:latest,${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:${{ github.sha }}
-
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Update docker-compose.yml for deployment
-        run: |
-          sed -i "s|build:|image: ${{ secrets.DOCKER_HUB_USERNAME }}/library-system:${{ github.sha }}|g" docker-compose.yml
-          sed -i "s|dockerfile: Dockerfile.angular||g" docker-compose.yml
-          sed -i "s|build:|image: ${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:${{ github.sha }}|g" docker-compose.yml
-          sed -i "s|dockerfile: Dockerfile.json-server||g" docker-compose.yml
-      
-      # Example for deployment to a server via SSH
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          key: ${{ secrets.DEPLOY_KEY }}
-          script: |
-            cd /opt/apps/library-system
-            docker-compose down
-            echo "${{ secrets.DOCKER_HUB_USERNAME }}/library-system:${{ github.sha }}" > .env
-            docker-compose pull
-            docker-compose up -d
-            docker system prune -f
->>>>>>> docker-servers
