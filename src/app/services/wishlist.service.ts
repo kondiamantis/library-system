@@ -10,8 +10,8 @@ import { environment } from '../../../environments/environment-dev';
   providedIn: 'root'
 })
 export class WishlistService {
-  // private apiUrl = `${environment.apiUrl}/books`;
-  private apiUrl = 'http://localhost:3000/books';
+  private apiUrl = `${environment.apiUrl}/books`;
+  // private apiUrl = 'http://localhost:3000/books';
   currentUserId = 1; // Hardcoded for demo
 
   constructor(
