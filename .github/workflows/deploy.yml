@@ -1,37 +1,170 @@
-name: Develop Branch Push Notification
+name: Develop Branch Build Workflow
 
 on:
   push:
     branches: [ develop ]
 
 jobs:
-  notify:
+  build:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Show success message
+      - name: Show start message
         run: |
           echo "===================================="
-          echo "✅ Successfully pushed to develop branch!"
+          echo "🚀 Starting build for develop branch!"
           echo "Repository: ${{ github.repository }}"
           echo "Commit: ${{ github.sha }}"
           echo "Pushed by: ${{ github.actor }}"
-          echo "Push timestamp: $(date)"
+          echo "Start timestamp: $(date)"
           echo "===================================="
       
-      - name: List changed files
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Using Node.js 20.x for Angular 17+ support
+          cache: 'npm'       # Enables caching for npm dependencies
+      
+      - name: Install dependencies
         run: |
-          echo "Files changed in this commit:"
-          git diff --name-status ${{ github.event.before }} ${{ github.sha }} || echo "Could not determine changed files"
-          
+          echo "Installing npm dependencies..."
+          npm ci
+          echo "✅ Dependencies installed successfully"
+      
+      - name: Build Angular application
+        run: |
+          echo "Building Angular application..."
+          npm run build
+          echo "✅ Angular build completed successfully"
+      
+      - name: List build output
+        run: |
+          echo "Build output files:"
+          ls -la dist/
+          echo "Browser files:" 
+          ls -la dist/library-system/browser/ || ls -la dist/library-system/ || echo "Could not locate build output directory"
+      
       - name: Repository summary
         run: |
           echo "Repository summary:"
           echo "- Total files: $(find . -type f | wc -l)"
-          echo "- JavaScript files: $(find . -name "*.js" | wc -l)"
           echo "- TypeScript files: $(find . -name "*.ts" | wc -l)"
           echo "- HTML files: $(find . -name "*.html" | wc -l)"
           echo "- CSS files: $(find . -name "*.css" | wc -l)"
+      
+      - name: Show completion message
+        run: |
+          echo "===================================="
+          echo "✅ Successfully built Angular application!"
+          echo "End timestamp: $(date)"
+          echo "===================================="
+          
+      # New steps for Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      
+      - name: Build and push Angular Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.angular
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/library-system:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/library-system:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/library-system:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/library-system:buildcache,mode=max
+      
+      - name: Build and push JSON Server Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.json-server
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:buildcache,mode=max
+      
+      - name: Generate deployment docker-compose file
+        run: |
+          echo "Generating docker-compose for deployment..."
+          cat > docker-compose.deploy.yml << EOL
+          version: '3'
+
+          services:
+            angular-app:
+              image: ${{ secrets.DOCKER_HUB_USERNAME }}/library-system:${{ github.sha }}
+              ports:
+                - "4200:80"
+              depends_on:
+                - json-server
+              networks:
+                - library-network
+              restart: unless-stopped
+
+            json-server:
+              image: ${{ secrets.DOCKER_HUB_USERNAME }}/library-system-json-server:${{ github.sha }}
+              ports:
+                - "3000:3000"
+              volumes:
+                - ./db.json:/app/db.json
+              networks:
+                - library-network
+              restart: unless-stopped
+
+          networks:
+            library-network:
+              driver: bridge
+          EOL
+          cat docker-compose.deploy.yml
+          echo "✅ Deployment docker-compose file created"
+      
+      - name: Upload docker-compose as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-compose-deploy
+          path: docker-compose.deploy.yml
+          retention-days: 7
+      
+      - name: Create deployment instructions
+        run: |
+          cat > DEPLOY.md << EOL
+          # Library System Deployment
+
+          ## How to deploy
+
+          1. Download the \`docker-compose.deploy.yml\` file from the GitHub Actions artifacts
+          2. Create a \`db.json\` file with your initial data (or copy an existing one)
+          3. Run:
+             \`\`\`bash
+             docker-compose -f docker-compose.deploy.yml up -d
+             \`\`\`
+          4. Access:
+             - Angular app: http://localhost:4200
+             - JSON Server: http://localhost:3000
+
+          ## Version Information
+
+          - Build: ${{ github.sha }}
+          - Date: $(date)
+          - Branch: develop
+          EOL
+          cat DEPLOY.md
+      
+      - name: Upload deployment instructions
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-instructions
+          path: DEPLOY.md
+          retention-days: 7
