@@ -52,18 +52,11 @@
       "genre": "Romance",
       "publishedYear": 1813,
       "description": "A classic romance novel.",
-      "stock": 7,
+      "stock": 8,
       "isbn": "978-0-14-028329-7",
       "coverImage": "https://m.media-amazon.com/images/I/71FTb9X6wsL._AC_UF1000,1000_QL80_.jpg",
       "favorited": [],
-      "borrowed": [
-        {
-          "userId": 1,
-          "borrowDate": "2025-04-02T16:27:41.358Z",
-          "dueDate": "2025-04-16T16:27:41.358Z",
-          "returned": false
-        }
-      ],
+      "borrowed": [],
       "rating": 5,
       "ratingCount": 1
     },

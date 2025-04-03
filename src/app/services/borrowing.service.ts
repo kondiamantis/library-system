@@ -12,8 +12,8 @@ import { environment } from '../../../environments/environment-dev';
 })
 export class BorrowingService {
   private borrowedBooks = new BehaviorSubject<Book[]>([]);
-  // private apiUrl = `${environment.apiUrl}/books`;  
-  private apiUrl = 'http://localhost:3000/books';
+  private apiUrl = `${environment.apiUrl}/books`;  
+  // private apiUrl = environment.apiUrl + '/books';
   
   // Mock user ID (replace with actual user authentication)
   currentUserId = 1;

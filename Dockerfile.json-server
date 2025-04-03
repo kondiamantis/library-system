@@ -1,17 +1,27 @@
-# Use Node.js as the base image
-FROM node:18-alpine
+FROM ubuntu:22.04
 
-# Set working directory inside the container
+# Set noninteractive installation to avoid prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install Node.js, npm and required packages
+RUN apt-get update && \
+    apt-get install -y curl gnupg2 && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create app directory
 WORKDIR /app
 
-# Install JSON Server globally
+# Install json-server globally
 RUN npm install -g json-server
 
-# Copy the db.json file to the container
+# Copy your db.json file (create this file in the same directory as the Dockerfile)
 COPY db.json /app/db.json
 
-# Expose the port JSON Server runs on
+# Expose the port json-server runs on
 EXPOSE 3000
 
-# Run JSON Server
-CMD ["json-server", "--host", "0.0.0.0", "--watch", "db.json"]
+# Start json-server when the container launches
+CMD ["json-server", "--watch", "db.json", "--host", "0.0.0.0"]

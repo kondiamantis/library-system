@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, switchMap } from 'rxjs';
 import { Book } from '../interfaces/book';
+import { environment } from '../../../environments/environment-dev';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'http://localhost:3000/books';
+  // private apiUrl = environment.apiUrl + '/books';
+  private apiUrl = `${environment.apiUrl}/books`;
+
 
   constructor(private http: HttpClient) {}
 
